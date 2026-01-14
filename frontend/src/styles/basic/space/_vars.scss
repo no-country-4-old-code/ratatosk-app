@@ -1,0 +1,13 @@
+@import "../grid/vars";
+
+$space-mini: $grid-step;
+$space-normal: 2 * $space-mini;
+$space-middle: 3 * $space-mini;
+$space-double: 4 * $space-mini;
+
+$padding-mini: $space-mini;
+$padding-element: $space-normal;
+$padding-element-double: $space-double;
+
+$margin-element: $space-normal;
+

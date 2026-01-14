@@ -1,0 +1,25 @@
+@import "src/styles/basic/space/vars";
+@import "src/styles/basic/size/vars";
+
+.height-of-app-bar {
+  height: $app-bar-height;
+}
+
+.fixed-app-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  width: 100%;
+}
+
+.icon_right {
+  padding: 0 $padding-element-double;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+
+

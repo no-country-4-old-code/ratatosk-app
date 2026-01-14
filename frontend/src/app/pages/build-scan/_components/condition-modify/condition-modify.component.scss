@@ -1,0 +1,16 @@
+.flex-box {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: space-evenly;
+  align-items: center;
+}
+
+.min-width-280px {
+  min-width: 280px;
+}
+
+.max-width-280px {
+  max-width: 280px;
+}

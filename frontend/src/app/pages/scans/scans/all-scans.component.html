@@ -1,0 +1,59 @@
+<div class="color-background">
+  <ng-container *ngIf="scanInfos$ | async as scanInfos else Loading">
+    <ng-container *ngFor="let info of scanInfos; let i = index">
+      <div class="x-padding-element-left-right" matRipple>
+
+        <div class="x-list-element-height-large x-padding-element-left-right" (click)="info.callback()">
+          <div class="container-relative x-overflow-text x-center-content-vertical x-flex-element-grow">
+
+            <div class="x-overflow-text x-grid-left-section-width x-center-content-vertical">
+              <img class="padding-correction-bottom x-border-radius-max x-icon-large"
+                   [src]=info.iconPath>
+            </div>
+
+            <div class="x-overflow-text x-flex-element-grow x-padding-element-right">
+              <div class="font-body2">{{info.title | makeFirstLetterBig}}</div>
+              <div class="x-padding-element-bottom-grid-step"></div>
+
+              <div class="x-flex-row-space-between font-caption font-colored">
+                <div class="font-colored">{{info.subtext | makeFirstLetterBig}}</div>
+              </div>
+            </div>
+
+            <ng-container *ngIf="info.numberOfNewAndUnseenAssets > 0">
+              <div class="absolute-position-right x-icon-small x-center-content x-border-radius-max font-caption color-accent"
+                   [class.text_size_small]="info.numberOfNewAndUnseenAssets > 100">
+                {{info.numberOfNewAndUnseenAssets}}
+              </div>
+            </ng-container>
+
+          </div>
+        </div>
+        <div class="x-padding-element-left">
+          <mat-divider class="x-divider-section-left-free"></mat-divider>
+        </div>
+
+
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="scanInfos.length === 0">
+      <div class="absolute-position-for-hint-box x-padding-element-double font-hint">
+        <div>Click here to create a new filter</div>
+        <div class="x-flex-row-end">
+          <div class="arrow-body_to_checkbox"></div>
+          <div class="arrow_to_checkbox"></div>
+        </div>
+      </div>
+    </ng-container>
+
+  </ng-container>
+</div>
+
+<ng-container *ngIf="scanInfos$ | async">
+  <app-fab-button (click)="navigateToBuildScan()" [icon]="iconAdd"></app-fab-button>
+</ng-container>
+
+<ng-template #Loading>
+  <app-loading></app-loading>
+</ng-template>

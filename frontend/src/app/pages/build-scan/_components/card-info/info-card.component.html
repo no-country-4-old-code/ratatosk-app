@@ -1,0 +1,32 @@
+
+<ng-template #base let-card$="card$">
+    <div *ngIf="card$ | async as card" (click)="subjectTriggerSwipe.next('left')" >
+        <div class="x-padding-element-double x-margin-element x-border-radius-min"
+             [ngClass]="[card.colorClass]">
+            <div class="x-flex-row">
+                <mat-icon class="x-icon-small">{{card.icon}}</mat-icon>
+                <div class="padding-title font-sub2 x-flex-element-grow">{{card.category | makeFirstLetterBig}}</div>
+                <div class="x-padding-element font-body2" *ngIf="card.numberOfCards > 1">{{card.cardIdx + 1}}/{{card.numberOfCards}}</div>
+            </div>
+            <div class="padding-element-top-double x-padding-element-bottom x-line-wrap-text font-body2">{{card.content}}</div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #card0>
+    <ng-container *ngTemplateOutlet="base;context: {card$: cardStreams[0]}"></ng-container>
+</ng-template>
+
+<ng-template #card1>
+    <ng-container *ngTemplateOutlet="base;context: {card$: cardStreams[1]}"></ng-container>
+</ng-template>
+
+<!-- Have to be placed within a container with a "relative" position and hidden overflow -->
+<div>
+    <app-slide [template0]="card0"
+            [template1]="card1"
+            [swipeTrigger$]="swipeTrigger$"
+            (swipeEvent)="onSwipe($event)"
+            slideRestriction="loop">
+    </app-slide>
+</div>

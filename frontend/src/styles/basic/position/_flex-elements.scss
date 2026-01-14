@@ -1,0 +1,12 @@
+@import "../space/vars";
+
+.x-flex-element-grow {
+  flex-grow: 1.5;
+}
+
+.x-flex-element-right {
+  text-align: right;
+  padding-left: $padding-mini;
+  flex-shrink: 0;
+}
+

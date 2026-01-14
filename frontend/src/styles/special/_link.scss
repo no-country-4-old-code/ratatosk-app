@@ -1,0 +1,8 @@
+.x-link-color {
+  color: var(--color-primary);
+}
+
+.x-link-style {
+  @extend .x-link-color;
+  text-decoration: underline;
+}

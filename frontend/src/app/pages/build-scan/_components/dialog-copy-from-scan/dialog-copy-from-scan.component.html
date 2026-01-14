@@ -1,0 +1,22 @@
+<div mat-dialog-title class="font-sub1">Copy from filter</div>
+<ng-container *ngIf="scanService.scans$ | async as scans; else loading">
+    <div mat-dialog-content>
+        <div *ngFor="let scan of scans" class="list-element x-center-content-vertical">
+            <div class="x-flex-row color-when-hover" matRipple [mat-dialog-close]="scan">
+                <img class="no-shrink x-padding-element x-border-radius-min x-icon-medium color-card" [src]=scan.iconPath>
+                <div class="x-padding-element"></div>
+                <div class="x-padding-element x-overflow-text">
+                    <div class="font-body1">{{scan.title}}</div>
+                    <div class="x-padding-element-top font-caption">{{data.extractInfo(scan)}}</div>
+                </div>
+            </div>
+        </div>
+        <ng-container *ngIf="scans.length === 0">
+            <div class="list-element x-center-content-vertical font-body1">You have no other filters to copy from.</div>
+        </ng-container>
+    </div>
+</ng-container>
+
+<ng-template #loading>
+    <app-loading></app-loading>
+</ng-template>

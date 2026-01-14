@@ -1,0 +1,13 @@
+<div class="x-flex-row">
+    <div class="x-flex-element-grow">
+        <input #search
+               class="search-form padding-correction x-overflow-text color-app-bar font-body1"
+               type="text"
+               placeholder="Search..."
+               [formControl] = "searchTermControl"
+               (keyup)="keyUpSearch.emit($event.target.value)">
+    </div>
+    <div *ngIf="searchTermControl.value" class="x-flex-element-right" (click)="onClickClearSearch()">
+        <mat-icon>close</mat-icon>
+    </div>
+</div>

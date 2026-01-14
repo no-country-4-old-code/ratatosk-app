@@ -1,0 +1,64 @@
+
+<div class="x-padding-element-left-right">
+    <app-list-element-icon
+            [icon]="userBannerIconPath"
+            [isIconImage]=true
+            [disableRipple]=true>
+        <div class="x-flex-row font-title">
+            <div class="x-padding-element-right font-title-colored">You are a</div>
+            <div class="x-padding-element x-border-radius-min color-is-active-outlined">Pro</div>
+        </div>
+    </app-list-element-icon>
+
+
+    <div class="x-padding-element-left-right">
+        <mat-divider class="x-divider-section-left-free"></mat-divider>
+    </div>
+</div>
+
+<div class="x-padding-element-left-right-double x-center-content">
+    <div class="x-max-screen-width x-flex-element-grow">
+        <app-list-element-basic>
+            <div class="x-padding-element-top-bottom x-flex-row font-sub2">Thank you for your support</div>
+        </app-list-element-basic>
+        <div class="x-padding-element"></div>
+        <div class="x-padding-element-top-bottom font-body2">
+            <ng-container *ngFor="let info of infos">
+                <app-list-element-text
+                        [title]="info.title | makeFirstLetterBig"
+                        [titleClass]="'font-caption-colored'"
+                        [subtext]=info.subtext
+                        [subtextClass]="'font-body2'"
+                        [disableRipple]="true"
+                >
+                </app-list-element-text>
+                <div class="x-padding-element-double"></div>
+            </ng-container>
+        </div>
+        <div class="x-padding-element"></div>
+        <ng-container *ngIf="isCanceled$ | async ; then Canceled else NotCanceled"></ng-container>
+        <div class="x-padding-element"></div>
+    </div>
+</div>
+
+<ng-template #Canceled>
+    <app-list-element-text
+            [subtext]="infoProVersionDateEnds$ | async"
+            [subtextClass]="'font-body2'"
+    >
+    </app-list-element-text>
+    <div class="x-padding-element-double"></div>
+    <div class="x-padding-element-double x-center-text x-border-radius-min font-button color-accent"
+         matRipple (click)="setCancelStatus(false)">Undone cancel</div>
+</ng-template>
+
+<ng-template #NotCanceled>
+    <app-list-element-text
+            [subtext]="infoProVersionDateExtends$ | async"
+            [subtextClass]="'font-body2'"
+    >
+    </app-list-element-text>
+    <div class="x-padding-element-double"></div>
+    <div class="x-padding-element-double x-center-text x-border-radius-min font-button color-card"
+         matRipple (click)="setCancelStatus(true)">Cancel Pro</div>
+</ng-template>

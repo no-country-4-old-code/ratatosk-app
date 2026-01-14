@@ -1,0 +1,57 @@
+<app-bar-return [title]=pageTitle></app-bar-return>
+
+<div class="x-padding-element-left-right x-padding-element-bottom">
+    <app-list-element-icon-and-text
+            [title]="appInfo.name"
+            [titleClass]="'font-title'"
+            [icon]="iconPath"
+            [callback]="logVersion"
+            [disableRipple]="true"
+            [isIconImage]=true>
+    </app-list-element-icon-and-text>
+</div>
+
+<div class="x-padding-element-left-right-triple">
+    <ng-container *ngTemplateOutlet="heading;context: {title: 'What we do'}"></ng-container>
+    <div class="x-padding-element-top font-body2 x-line-wrap-text" [innerHtml]="whatWeDo"></div>
+    <div class="x-padding-element-double"></div>
+    <ng-container *ngTemplateOutlet="heading;context: {title: 'Who we are'}"></ng-container>
+    <div class="x-padding-element-top font-body2 x-line-wrap-text" [innerHtml]="whoWeAre"></div>
+    <div class="x-padding-element-double"></div>
+    <ng-container *ngTemplateOutlet="heading;context: {title: 'Current version'}"></ng-container>
+    <div class="x-padding-element-top font-body2">{{appInfo.version}} - {{appInfo.versionBuildNumber}}{{postVersionInfo}}</div>
+    <div class="x-padding-element-double"></div>
+    <ng-container *ngTemplateOutlet="heading;context: {title: 'Follow us'}"></ng-container>
+</div>
+<div class="x-padding-element-left">
+    <ng-container *ngTemplateOutlet="item;context: {selected: itemsConnect}"></ng-container>
+    <div class="x-padding-element"></div>
+</div>
+<div class="x-padding-element-left-right-triple">
+    <ng-container *ngTemplateOutlet="heading;context: {title: 'Special thanks'}"></ng-container>
+</div>
+<div class="x-padding-element-left">
+    <ng-container *ngTemplateOutlet="item;context: {selected: itemsThank}"></ng-container>
+</div>
+<div class="x-padding-element-double"></div>
+<div class="x-padding-element-left-right-triple">
+    <p class="x-padding-element-top-bottom font-caption-colored">&copy; Copyright 2022 Ratatosk GmbH</p>
+</div>
+
+
+<ng-template #heading let-title="title">
+    <div class="font-caption-colored">{{title | makeFirstLetterBig}}</div>
+</ng-template>
+
+<ng-template #item let-givenItems="selected">
+        <ng-container *ngFor="let item of givenItems" >
+            <app-list-element-icon-and-text
+                    [title]="item.title"
+                    [titleClass]="'font-body2'"
+                    [icon]="item.icon"
+                    [callback]="item.callback"
+                    [isIconImage]=true>
+            </app-list-element-icon-and-text>
+        </ng-container>
+</ng-template>
+

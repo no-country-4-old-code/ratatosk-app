@@ -1,0 +1,9 @@
+
+<ng-container  *ngIf="isDisabledObj$ | async as obj">
+    <div [ngClass]="{'secondary-without-offset': isOnlyButton, 'secondary-with-offset': !isOnlyButton }"
+         class="x-padding-element-double x-animate-appear-slow">
+        <button mat-mini-fab color="accent" [disabled]="obj.isDisabled" (click)="onClick(obj.isDisabled)">
+            <mat-icon>{{icon}}</mat-icon>
+        </button>
+    </div>
+</ng-container>

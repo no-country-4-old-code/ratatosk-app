@@ -1,0 +1,87 @@
+@import "../../../../styles/basic/mixins/breakpoints";
+@import "../../../../styles/basic/space/vars";
+@import "../../../../styles/basic/size/vars";
+
+$size-char-small: 8px;
+$size-char-medium: 12px;
+$chart-line-stroke: 1.5px;
+
+.chart {
+  position: relative;
+}
+
+.chart-size-medium {
+  height:50vh;
+}
+
+.chart-size-small {
+  height:28vh;
+}
+
+.axis {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.chart-line-unselected {
+  fill: none;
+  stroke-width: $chart-line-stroke;
+}
+
+.chart-line-selected {
+  fill: none;
+  stroke-width: 3 * $chart-line-stroke;
+}
+
+.tooltip-line {
+  fill: none;
+  stroke: white;
+  stroke-width: 0.5px;
+  stroke-dasharray: 5,5;
+}
+
+.tooltip-card {
+  padding: $padding-element $padding-element-double;
+  display: inline-block;
+}
+
+.tooltip-card-date {
+  padding-left: $padding-element;
+}
+
+.tooltip-card-color-box {
+  @include respond-to(small-screen) { width: $size-char-small; height: $size-char-small;}
+  @include respond-to(handhelds) { width: $size-char-small; height: $size-char-small;}
+  @include respond-to(medium-screens) { width: $size-char-medium; height: $size-char-medium;}
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.tooltip-card-text {
+  @include respond-to(small-screen) { font-size: $size-char-small;}
+  @include respond-to(handhelds) { font-size: $size-char-small;}
+  @include respond-to(medium-screens) { font-size: $size-char-medium;}
+}
+
+.tooltip-dot {
+  font-size: 1px;
+  border-radius: 50%;
+  height: 2 * $grid-step;
+  width: 2 * $grid-step;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: flex-start;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+

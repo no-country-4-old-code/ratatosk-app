@@ -1,0 +1,16 @@
+@import "mixin_compatibility";
+
+$rotate-to-normal: rotate3d(0, 0, 0, 0deg);
+$rotate-to-180X: rotate3d(1, 0, 0, 180deg);
+
+$slide-offset: 125vw;
+$translate-to-normalX: translateX(0);
+$translate-to-rightX: translateX($slide-offset);
+$translate-to-leftX: translateX(-$slide-offset);
+
+/* Overlays a potential flip-card-back and need therefore a hidden backface.
+   To define a hidden backface we need to define which side is front by using transform */
+.x-animation-backface-visibility-front-card {
+  @include for-multi-platform(transform, rotateY(0deg));
+  @include for-multi-platform(backface-visibility, hidden);
+}

@@ -1,0 +1,50 @@
+import {LookupFirebaseCallFuncUrl, LookupFirebaseConfig} from '../datatypes/firebase-projects';
+
+const locationOfServer = 'us-central1';
+
+// has to be adapted (or added) in firestore rules
+export const demoUID = 'vhXVS5Fko1aFCJNnU0A3c4zIIKi1';
+
+export const isPublicRelease = true;
+
+// !!! For bitbucket pipeline manuall edit (where to deploy --> project name)
+export const firebaseConfigurations: LookupFirebaseConfig = {
+    'SCHEDULE': {
+        apiKey: "AIzaSyAojbyOenbZo1KXLtszkjyrLrykuI4dZrA",
+        authDomain: "ratatosk-schedule.firebaseapp.com",
+        projectId: "ratatosk-schedule",
+        storageBucket: "ratatosk-schedule.appspot.com",
+        messagingSenderId: "726368158225",
+        appId: "1:726368158225:web:bee38aa7c91872a6d427b0"
+    },
+    'WEBPAGE': {
+        apiKey: "AIzaSyDOwbkeRrxD9GrNK0VvecpY-IC34X0g0as",
+        authDomain: "ratatosk-webpage.firebaseapp.com",
+        projectId: "ratatosk-webpage",
+        storageBucket: "ratatosk-webpage.appspot.com",
+        messagingSenderId: "200013976173",
+        appId: "1:200013976173:web:9b8edd1aa182dc39e76564"
+    },
+    'USER_001': {
+        apiKey: "AIzaSyAc8Pe1ndx8twjpgO2tfyZNZMkvvgUWFqQ",
+        authDomain: "ratatosk-user-001.firebaseapp.com",
+        projectId: "ratatosk-user-001",
+        storageBucket: "ratatosk-user-001.appspot.com",
+        messagingSenderId: "573341911637",
+        appId: "1:573341911637:web:a865af6fa7c1e07ee1a2dc",
+        databaseURL: 'https://ratatosk-user-001.firebaseio.com',
+        measurementId: 'G-HMBJLDVLEG'
+    }
+};
+
+export const firebaseAppUrl = 'https://ratatosk.app';
+
+export const firebaseAppCallCloudFunctionsUrl: LookupFirebaseCallFuncUrl = {
+    'SCHEDULE': `https://${locationOfServer}-${firebaseConfigurations['SCHEDULE'].projectId}.cloudfunctions.net`,
+    'WEBPAGE': 'undefined',
+    'USER_001': `https://${locationOfServer}-${firebaseConfigurations['USER_001'].projectId}.cloudfunctions.net`,
+};
+
+export function isFirebaseUserProject(name: string): boolean {
+    return name.startsWith('USER_') && name.length === 'USER_xxx'.length;
+}

@@ -1,0 +1,23 @@
+
+$border-witdh-top-bottom: 2px;
+$border-witdh-left: 4px;
+
+
+.flex_box {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: space-evenly;
+  align-items: center;
+}
+
+.border-style {
+  border-style: outset;
+  border-width: $border-witdh-top-bottom 0 $border-witdh-top-bottom $border-witdh-left;
+}
+
+.text-sideways {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}

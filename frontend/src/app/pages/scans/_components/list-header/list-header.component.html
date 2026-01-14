@@ -1,0 +1,31 @@
+<div *ngIf="sortInfo$ | async as sortInfo"
+     class="height-of-list-header x-center-content-vertical x-padding-element-left-right font-body2 x-overflow-text">
+  <div class="x-grid-left-section-width">
+    <ng-container *ngTemplateOutlet="sortLabel;context: {label: leftLabel, sortInfo: sortInfo}"></ng-container>
+  </div>
+  <div class="x-flex-element-grow">
+    <ng-container *ngTemplateOutlet="sortLabel;context: {label: middleLabel, sortInfo: sortInfo}"></ng-container>
+  </div>
+  <div class="x-flex-element-right">
+    <ng-container *ngTemplateOutlet="sortLabel;context: {label: rightLabel, sortInfo: sortInfo}"></ng-container>
+  </div>
+</div>
+
+<ng-template #sortLabel let-givenLabel="label" let-sortInfo="sortInfo">
+  <div class="inner-element">
+    <div class="x-border-radius-min x-center-content-vertical"
+         matRipple
+         [ngClass]="{
+           'color-foreground-text': isSelected(givenLabel, sortInfo),
+           'color-foreground-disabled': !isSelected(givenLabel, sortInfo)
+           }"
+         (click)="onClick(givenLabel, sortInfo)">
+      {{givenLabel | makeFirstLetterBig}}
+
+      <mat-icon *ngIf="isSelected(givenLabel, sortInfo)"
+                class="x-icon-mini x-padding-element-left">
+        {{lookupAscendingIcon[sortInfo.ascending]}}
+      </mat-icon>
+    </div>
+  </div>
+</ng-template>

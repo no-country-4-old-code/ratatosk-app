@@ -1,0 +1,15 @@
+<div mat-dialog-title class="font-sub1">Select {{data.title}}</div>
+
+<div mat-dialog-content>
+    <ng-container *ngFor="let option of data.options; let idx=index">
+        <div class="x-padding-element-top-bottom x-margin-element-top-bottom x-border-radius-min"
+             [ngClass]="{'color-is-selected-outlined': option === data.selected}"
+             [mat-dialog-close]="(option !== data.selected) ? option : undefined"
+             matRipple>
+            <div class="font-sub2" [innerHTML]="displayedOptions[idx] | async | makeFirstLetterBig"></div>
+            <div class="x-padding-element-bottom "></div>
+            <div class="x-line-wrap-text font-caption-colored">{{data.optionsInfo[idx] | makeFirstLetterBig}}</div>
+        </div>
+    </ng-container>
+</div>
+

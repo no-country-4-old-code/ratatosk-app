@@ -1,0 +1,17 @@
+
+
+<ng-container *ngIf="isContentArrayOfElements; then DisplayArray else DisplaySingle"></ng-container>
+
+<ng-template #DisplaySingle>
+    <app-dynamic-load [component]="doc.component" [attributeData]="{doc: doc}"></app-dynamic-load>
+</ng-template>
+
+<ng-template #DisplayArray>
+    <ng-container *ngIf="doc.header && doc.header.length > 0">
+        <div class="x-padding-element-bottom font-caption-colored">{{doc.header}}</div>
+    </ng-container>
+
+    <ng-container *ngFor="let docCurrent of doc.content">
+        <app-dynamic-load [component]="docCurrent.component" [attributeData]="{doc: docCurrent}"></app-dynamic-load>
+    </ng-container>
+</ng-template>

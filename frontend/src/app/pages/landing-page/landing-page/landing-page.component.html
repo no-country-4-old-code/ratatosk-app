@@ -1,0 +1,87 @@
+<div class="background-landing flex-column" style="min-height: 100%">
+
+    <header class="x-flex-row x-list-element-height-medium x-padding-element-left-right-double" style="width: 90%">
+        <div matRipple class="background-app-bar-button" (click)="navigateTo(internalLinks.linkToAbout)">
+            <img class="x-icon-medium" [src]=iconApp alt="Ratatosk icon">
+        </div>
+        <div class="x-flex-element-grow x-padding-element"></div>
+
+        <div matRipple class="background-app-bar-button" (click)="navigateTo(internalLinks.linkToMenu)">
+            <mat-icon class="x-icon-small">{{iconsMaterial.login}}</mat-icon>
+        </div>
+    </header>
+
+    <div class="flex-space-around-wrapped x-padding-element-left-right-double" style="width: 90%">
+
+        <section class="section-width">
+
+            <div class="x-padding-element-double"></div>
+
+            <div class="font-h2">
+                <div class="animate-fade-in-1 font-primary">Screen.</div>
+                <div class="animate-fade-in-2 x-padding-element-top-bottom-double">The.</div>
+                <div class="animate-dye-market x-border-radius-min" style="z-index: 99">
+                    <div class="animate-fade-in-market">Market.</div>
+                </div>
+            </div>
+
+            <div class="x-padding-element-double"></div>
+            <div class="x-padding-element-double"></div>
+
+            <div class="animate-drop x-padding-element-top-bottom-double font-h4">TRY IT</div>
+
+            <div class="font-button">
+                <div class="x-flex-row x-list-element-height-mini">
+                    <mat-icon class="animate-fade-in-feature1">{{iconsMaterial.views}}</mat-icon>
+                    <div class="x-padding-element-double"></div>
+                    <div class="animate-fade-in-feature1">Create your own automated market filter</div>
+                </div>
+                <div class="x-flex-row x-list-element-height-mini">
+                    <mat-icon class="animate-fade-in-feature2">{{iconsMaterial.update}}</mat-icon>
+                    <div class="x-padding-element-double"></div>
+                    <div class="animate-fade-in-feature2">All your filters are updated every 5 minutes with new data</div>
+                </div>
+                <div class="x-flex-row x-list-element-height-mini">
+                    <mat-icon class="animate-fade-in-feature3">{{iconsMaterial.savings}}</mat-icon>
+                    <div class="x-padding-element-double"></div>
+                    <div class="animate-fade-in-feature3">Use it for free</div>
+                </div>
+            </div>
+
+            <div class="x-padding-element"></div>
+
+            <div class="animate-fade-in-register-button x-center-content x-padding-element-double">
+                <div matRipple
+                     (click)="navigateTo(internalLinks.linkToMenu)"
+                     class="x-border-radius-max x-padding-element-top-bottom x-padding-element-left-right-double font-title color-accent">
+                    Try it now
+                </div>
+            </div>
+
+        </section>
+
+        <section class="section-width">
+            <div class="x-padding-element-double"></div>
+            <div class="x-padding-element-double"></div>
+
+            <div class="animate-rise x-padding-element-top-bottom-double font-h4">HOW TO</div>
+            <div class="animate-fade-in-howto-video iframe-container">
+                <iframe src="https://www.youtube.com/embed/jI1BmK2O-a0"
+                        title="YouTube How To video" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+    </div>
+
+    <div class="x-padding-element-double"></div>
+    <div class="x-padding-element-double"></div>
+
+    <footer class="x-flex-row-space-between-wrap x-padding-element">
+        <a class="x-link-style x-margin-element" rel=”nofollow” matRipple (click)="navigateTo(internalLinks.linkToImpressum)">Impressum / Imprint</a>
+        <a class="x-link-style x-margin-element" rel=”nofollow” matRipple (click)="navigateTo(internalLinks.linkToTermsAndConditions)">Terms and conditions</a>
+        <a class="x-link-style x-margin-element" rel=”nofollow” matRipple (click)="navigateTo(internalLinks.linkToPrivatePolicy)">Private Policy</a>
+        <a class="x-link-style x-margin-element" rel=”nofollow” matRipple (click)="navigateTo(internalLinks.linkToDisclaimer)">Disclaimer</a>
+        <a class="x-link-style x-margin-element" [href]=externalLinkToTwitter>Twitter</a>
+    </footer>
+</div>

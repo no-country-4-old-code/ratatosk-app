@@ -1,0 +1,35 @@
+<div class="x-padding-element-top-bottom">
+    <mat-expansion-panel (opened)="doc.panelState = true" (closed)="doc.panelState = false">
+
+        <mat-expansion-panel-header class="x-flex-row font-body2">
+            <div class="x-center-content-vertical">
+                {{doc.header | makeFirstLetterBig}}
+            </div>
+            <ng-container *ngIf="doc.isOnlyForPro">
+                <div class="x-padding-element x-flex-element-grow"></div>
+                <div class="x-padding-element x-border-radius-max color-primary">pro</div>
+                <div class="x-padding-element"></div>
+            </ng-container>
+        </mat-expansion-panel-header>
+
+        <ng-container *ngFor="let docCurrent of doc.content">
+            <app-dynamic-load [component]="docCurrent.component" [attributeData]="{doc: docCurrent}"></app-dynamic-load>
+        </ng-container>
+
+        <ng-container *ngIf="doc.supportedParams !== undefined">
+            <ng-container *ngTemplateOutlet="HandleSupportedParams;context: {content: doc.supportedParams}"></ng-container>
+        </ng-container>
+
+    </mat-expansion-panel>
+</div>
+
+<ng-template #HandleSupportedParams let-docs="content">
+    <app-documentation-divider [doc]="{header: 'Supported params'}"></app-documentation-divider>
+    <ng-container *ngFor="let param of docs">
+        <div class="x-padding-element-top-bottom x-flex-row-align-items-start font-body2">
+            <div class="width-left-section text-align-top">{{param.header}}</div>
+            <div class="x-padding-element"></div>
+            <div>{{param.content}}</div>
+        </div>
+    </ng-container>
+</ng-template>

@@ -1,0 +1,22 @@
+<div class="x-flex-row-space-between">
+    <button (click)="processLegalSignUP(authProvider.Google)"
+            *ngIf="providers === authProvider.ALL || providers.includes(authProvider.Google)"
+            mat-button>
+        <mat-icon svgIcon="google-colored"></mat-icon>
+        Google
+    </button>
+
+    <button (click)="processLegalSignUP(authProvider.Twitter)"
+            *ngIf="providers === authProvider.ALL || providers.includes(authProvider.Twitter)"
+            class="twitter-filled"
+            mat-button>
+        <mat-icon svgIcon="twitter"></mat-icon>
+        Twitter
+    </button>
+    <button (click)="processLegalSignUP(authProvider.Github)"
+            *ngIf="providers === authProvider.ALL || providers.includes(authProvider.Github)"
+            mat-button>
+        <mat-icon svgIcon="github"></mat-icon>
+        GitHub
+    </button>
+</div>

@@ -1,0 +1,16 @@
+@import "../../../../styles/basic/size/vars";
+@import "src/styles/special/fixed-after-app-bar";
+
+.mat-tab-shadow-element {
+  height: $mat-tab-header-height;
+  width: 100%;
+}
+
+.overwrite-touch {
+  touch-action: pan-y !important; // otherwise it is disabled in tabs
+}
+
+:host ::ng-deep .mat-tab-header {
+  @extend .x-fixed-after-app-bar;
+}
+

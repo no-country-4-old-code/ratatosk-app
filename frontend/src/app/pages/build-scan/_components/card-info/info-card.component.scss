@@ -1,0 +1,12 @@
+@import "src/styles/basic/space/vars";
+$padding-correction: 1px;
+
+.padding-title {
+  padding-top: $padding-element - $padding-correction;
+  padding-left: $padding-element;
+  padding-bottom: $padding-mini + $padding-correction;
+}
+
+.padding-element-top-double {
+  padding-top: $padding-element-double;
+}

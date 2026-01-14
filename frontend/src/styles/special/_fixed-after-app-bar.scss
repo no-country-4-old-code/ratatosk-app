@@ -1,0 +1,12 @@
+@import "../basic/size/vars";
+@import "../basic/position/vars";
+
+$offset-after-app-bar: $app-bar-height - 2;
+
+.x-fixed-after-app-bar {
+  top: $offset-after-app-bar;
+  z-index: $elevation-medium;
+  position: fixed;
+  left: 0;
+  width: 100%;
+}

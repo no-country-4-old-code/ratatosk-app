@@ -1,0 +1,12 @@
+<app-basic-bar
+        [iconLeft]="iconLeft"
+        [iconRightFirst]="iconRightFirst"
+        [iconRightSecond]="iconRightSecond"
+        [iconTitlePath]="iconTitlePath"
+        [isIconTitleDisplayedOnCard]="isIconTitleDisplayedOnCard"
+        [disableElevation]="disableElevation"
+        [disableIcons]="[disableMenu, false, false]"
+        (clickOnGivenElement)="onClick($event)">
+    <span class="title x-overflow-text"  (click)="onClick(title)">{{title | makeFirstLetterBig}}</span>
+</app-basic-bar>
+

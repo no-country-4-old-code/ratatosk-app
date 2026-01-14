@@ -1,0 +1,16 @@
+
+<ng-container *ngIf="options$ | async as options">
+    <ng-container *ngIf="maxIndex$ | async as maxIndex">
+        <mat-slider
+                class="slider-width"
+                [color]="'primary'"
+                [max]="maxIndex"
+                [min]="minIndex"
+                [step]="stepWidth"
+                [thumbLabel]="false"
+                (input)="emitSelectionChangeEvent($event.value, options)"
+                (change)="emitSelectionChangeEvent($event.value, options)"
+                [value]="indexFromExternal$ | async">
+        </mat-slider>
+    </ng-container>
+</ng-container>

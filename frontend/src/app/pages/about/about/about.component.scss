@@ -1,0 +1,9 @@
+@import "src/styles/basic/space/vars";
+
+.x-padding-element-left-right-triple {
+  padding-left: 3 * $padding-element;
+  padding-right: 3 * $padding-element;
+
+}
+
+

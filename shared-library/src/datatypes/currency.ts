@@ -1,0 +1,37 @@
+export type Currency =
+    'usd' |
+    'aed' |
+    'aud' |
+    'bdt' |
+    'brl' |
+    'cad' |
+    'chf' |
+    'clp' |
+    'cny' |
+    'czk' |
+    'dkk' |
+    'eur' |
+    'gbp' |
+    'hkd' |
+    'idr' |
+    'ils' |
+    'inr' |
+    'jpy' |
+    'krw' |
+    'lkr' |
+    'mxn' |
+    'myr' |
+    'ngn' |
+    'nok' |
+    'nzd' |
+    'php' |
+    'pkr' |
+    'pln' |
+    'rub' |
+    'sek' |
+    'sgd' |
+    'thb' |
+    'try' |
+    'uah' |
+    'vnd' |
+    'zar';

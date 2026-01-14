@@ -1,0 +1,45 @@
+@use '~@angular/material' as mat;
+@import "~styles/basic/mixins/cross_browser_opacity";
+
+
+@mixin overwrite_material_styles($theme) {
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  .mat-tab-header{
+    background-color: mat.get-color-from-palette($background, 'dialog');
+  }
+
+  ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: mat.get-color-from-palette($foreground, 'text');
+    @include cross_browser_opacity(1);
+  }
+
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: mat.get-color-from-palette($foreground, 'text');
+  }
+
+  ::-ms-input-placeholder { /* Microsoft Edge */
+    color: mat.get-color-from-palette($foreground, 'text');
+  }
+
+  // remove margin from mat-headers
+  .mat-h1, .mat-h2, .mat-h3, .mat-h4, .mat-h5, .mat-subheading-1, .mat-subheading-2 {
+    margin: 0;
+  }
+
+  // set primary as color of active tab
+  .mat-tab-label-active, .mat-tab-label.mat-tab-label-active:not(.mat-tab-disabled),
+  .mat-tab-label.mat-tab-label-active.cdk-keyboard-focused:not(.mat-tab-disabled) {
+    color: var(--color-primary);
+    @include cross_browser_opacity(1);
+  }
+
+  // elevate navigation bar and tab header
+  .mat-tab-nav-bar, .mat-tab-header {
+    border-bottom: 0;
+    position: relative;
+    z-index: 4;
+    @include mat.elevation(4);
+  }
+}

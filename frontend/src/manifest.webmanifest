@@ -1,0 +1,128 @@
+{
+  "name": "Ratatosk",
+  "short_name": "Ratatosk",
+  "description": "Ratatosk is a web app which helps you to monitor and analyze cryptocurrencies. Create your own automated analysis based on e.g. dynamic technical indicators and let them run over more than 500 cryptocurrencies. Ratatosk reruns all your analysis every 5 minutes with new data and notify you if a new cryptocurrency fits your trading strategy.",
+  "theme_color": "#101d24",
+  "background_color": "#101d24",
+  "display": "standalone",
+  "gcm_sender_id": "103953800507",
+  "scope": "/",
+  "categories": ["finance"],
+  "start_url": "/menu/",
+  "icons": [
+    {
+      "src": "assets/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "assets/screenshots/desktop_1366x768/snapshot_observed_desktop_1366x768.png",
+      "sizes": "1366x768",
+      "platform": "wide",
+      "label": "Create your own automated analysis and let them run over more than 500 cryptocurrencies."
+    },
+    {
+      "src": "assets/screenshots/desktop_1366x768/snapshot_scan_desktop_1366x768.png",
+      "sizes": "1366x768",
+      "platform": "wide",
+      "label": "Ratatosk reruns all your analysis every 5 minutes with new data and notify you if a new cryptocurrency fits your trading strategy."
+    },
+    {
+      "src": "assets/screenshots/desktop_1366x768/snapshot_menu_desktop_1366x768.png",
+      "sizes": "1366x768",
+      "platform": "wide",
+      "label": "You can have multiple scans/ analysis at the same time."
+    },
+    {
+      "src": "assets/screenshots/desktop_1366x768/snapshot_chart_desktop_1366x768.png",
+      "sizes": "1366x768",
+      "platform": "wide",
+      "label": "Observe different coin metric like price, rank, supply, etc. over time."
+    },
+    {
+      "src": "assets/screenshots/desktop_1366x768/snapshot_conditions_desktop_1366x768.png",
+      "sizes": "1366x768",
+      "platform": "wide",
+      "label": "Use technical indicators to boost your automated analysis."
+    },
+    {
+      "src": "assets/screenshots/desktop_1366x768/snapshot_build_desktop_1366x768.png",
+      "sizes": "1366x768",
+      "platform": "wide",
+      "label": "Create your own automated analysis and let them run over more than 500 cryptocurrencies."
+    },
+    {
+      "src": "assets/screenshots/mobile_400x800/snapshot_observed_mobile_480x800.png",
+      "sizes": "400x800",
+      "platform": "narrow",
+      "label": "Create your own automated analysis and let them run over more than 500 cryptocurrencies."
+    },
+    {
+      "src": "assets/screenshots/mobile_400x800/snapshot_main_mobile_480x800.png",
+      "sizes": "400x800",
+      "platform": "narrow",
+      "label": "You can have multiple scans/ analysis at the same time."
+    },
+    {
+      "src": "assets/screenshots/mobile_400x800/snapshot_scan_mobile.png",
+      "sizes": "400x800",
+      "platform": "narrow",
+      "label": "Ratatosk reruns all your analysis every 5 minutes with new data and notify you if a new cryptocurrency fits your trading strategy."
+    },
+    {
+      "src": "assets/screenshots/mobile_400x800/snapshot_build_mobile_480x800.png",
+      "sizes": "400x800",
+      "platform": "narrow",
+      "label": "Create your own automated analysis and let them run over more than 500 cryptocurrencies."
+    },
+    {
+      "src": "assets/screenshots/mobile_400x800/snapshot_chart_mobile_480x800.png",
+      "sizes": "400x800",
+      "platform": "narrow",
+      "label": "Observe different coin metric like price, rank, supply, etc. over time."
+    },
+    {
+      "src": "assets/screenshots/mobile_400x800/snapshot_conditons2_mobile_480x800.png",
+      "sizes": "400x800",
+      "platform": "narrow",
+      "label": "Use technical indicators to boost your automated analysis."
+    }
+    ]
+}

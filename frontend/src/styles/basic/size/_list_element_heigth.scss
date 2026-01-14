@@ -1,0 +1,14 @@
+@import "../position/center_elements";
+@import "vars";
+
+$lists: ('mini': $list-element-height-mini,
+        'small': $list-element-height-small,
+        'medium': $list-element-height-medium,
+        'large': $list-element-height-large);
+
+@each $name, $height in $lists {
+  .x-list-element-height-#{$name} {
+    @extend .x-center-content-vertical;
+    height: $height;
+  }
+}

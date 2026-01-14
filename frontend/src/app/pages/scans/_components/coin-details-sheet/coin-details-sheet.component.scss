@@ -1,0 +1,19 @@
+@import "../../../../../styles/basic/space/padding";
+@import "../../../../../styles/basic/grid/vars";
+
+
+.title {
+  padding-left: $padding-mini;
+}
+
+.padding-info-cards {
+  padding: $padding-element-double;
+}
+
+.card-height {
+  height: $grid-step * 23; // 92 px
+}
+
+.text-align-right {
+  text-align: right;
+}

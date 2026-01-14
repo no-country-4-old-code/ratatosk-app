@@ -1,0 +1,30 @@
+<div mat-dialog-title>
+    <div class="font-sub1">Select displayed coin</div>
+    <div class="x-padding-element"></div>
+    <div class="x-flex-row x-list-element-height-mini">
+        <mat-icon>search</mat-icon>
+        <div class="x-padding-element"></div>
+        <app-search [hasFocusOnStartUp]="false" (keyUpSearch)="onSearchTermUpdate($event)" ></app-search>
+    </div>
+    <mat-divider></mat-divider>
+</div>
+<div mat-dialog-content>
+    <cdk-virtual-scroll-viewport style="height: 50vh"  itemSize="40">
+        <div *cdkVirtualFor="let id of coinIds$ | async; templateCacheSize: 0">
+            <div class="x-list-element-height-mini x-center-content-vertical" [mat-dialog-close]="id" matRipple>
+                <div class="x-flex-element-grow x-flex-row x-padding-element-top-bottom">
+                    <img class="x-icon-small x-border-radius-max" [src]=lookup[id].iconPath>
+                    <div class="x-padding-element"></div>
+                    <div class="x-flex-element-grow font-body2">{{lookup[id].name}}</div>
+                    <div class="x-flex-element-right x-padding-element-left-right font-caption">
+                        {{lookup[id].symbol | uppercase}}
+                    </div>
+                </div>
+            </div>
+            <div class="padding-of-divider">
+                <mat-divider></mat-divider>
+            </div>
+        </div>
+    </cdk-virtual-scroll-viewport>
+</div>
+

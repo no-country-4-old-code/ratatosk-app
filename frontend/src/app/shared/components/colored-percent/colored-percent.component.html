@@ -1,0 +1,11 @@
+
+<ng-container *ngIf="isDisplayedBlock;then BlockVersion else InlineVersion">
+</ng-container>
+
+<ng-template #BlockVersion>
+  <div [className]="value >= 0 ? 'color-positive-number' : 'color-negative-number'"> {{value | percent:'1.0-2'}} </div>
+</ng-template>
+
+<ng-template  #InlineVersion>
+  <span [className]="value >= 0 ? 'color-positive-number' : 'color-negative-number'"> {{value | percent:'1.0-2'}} </span>
+</ng-template>

@@ -1,0 +1,9 @@
+<div mat-dialog-title class="font-sub1">Info</div>
+<div mat-dialog-content class="line-breaks x-padding-element">
+    <ng-container *ngTemplateOutlet="data.template"></ng-container>
+</div>
+<div class="x-padding-element"></div>
+<div class="x-padding-element">
+    <button class="float-right x-padding-element-left" mat-button [mat-dialog-close]="true" cdkFocusInitial>Ok</button>
+</div>
+

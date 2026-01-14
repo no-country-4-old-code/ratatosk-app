@@ -1,0 +1,21 @@
+@use '~@angular/material' as mat;
+@import "themes/themes-typography";
+@import "themes/themes-color";
+@import "themes/mixin_create_color_classes";
+@import "themes/mixin_create_font_classes";
+@import "themes/overwrite_material_styles";
+// !!! Import this file only once via config file
+$theme: get-dark-theme();
+
+// Set font styles for Angular Material.
+@include mat.core($typography_roboto);
+
+// Set color theme for Angular Material.
+@include mat.all-component-themes($theme);
+
+// Create custom font and color classes based on typography and theme
+@include create_own_color_classes($theme);
+@include create_own_font_classes($typography_roboto, $theme);
+
+// Overwrite some Angular Material styles
+@include overwrite_material_styles($theme);

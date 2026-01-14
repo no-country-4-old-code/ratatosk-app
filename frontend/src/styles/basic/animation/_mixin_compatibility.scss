@@ -1,0 +1,11 @@
+
+@mixin for-multi-platform($property, $value) {
+  @include prefix($property, $value, webkit moz ms o);
+}
+
+@mixin prefix($property, $value, $prefixes: ()) {
+  @each $prefix in $prefixes {
+    #{'-' + $prefix + '-' + $property}: $value;
+  }
+  #{$property}: $value;
+}

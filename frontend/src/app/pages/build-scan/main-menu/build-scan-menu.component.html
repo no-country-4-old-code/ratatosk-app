@@ -1,0 +1,82 @@
+<app-bar-normal
+    [title]=pageTitle
+    [iconLeft]="icons.clear"
+    (clickOnGivenElement)="onClickAtAppBar($event)">
+</app-bar-normal>
+
+<ng-container *ngIf="build.currentBlueprint$ | async as scan">
+
+    <div class="x-padding-element-top"></div>
+
+    <div class="x-flex-row x-padding-element">
+        <div class="width-left-element x-padding-element" matRipple (click)="openDialogIcon()">
+            <ng-container *ngIf="contentIcon$ | async as content">
+                <img class="x-icon-extra-large color-card" [src]="content" matRipple>
+            </ng-container>
+        </div>
+        <div class="x-flex-element-grow font-body1">
+            <mat-form-field>
+                <mat-label>Name of filter</mat-label>
+                <input matInput [formControl]="titleControl" [value]="scan.title">
+            </mat-form-field>
+        </div>
+        <div class="x-padding-element-right"></div>
+        <div class="x-padding-element">
+            <mat-icon class="x-icon-small"></mat-icon>
+        </div>
+    </div>
+
+    <div class="x-padding-element-top"></div>
+
+    <app-category-card
+            description="Filter"
+            [content$]="contentPreselection$"
+            (clickOnCard)="openPreselection()"
+            (clickOnSideOption)="openDialogPreselectionCopy()">
+    </app-category-card>
+
+    <app-category-card
+            description="based on"
+            [content$]="contentConditions$"
+            (clickOnCard)="openConditions()"
+            (clickOnSideOption)="openDialogConditionsCopy()">
+    </app-category-card>
+
+    <ng-template #InfoBoxNotify>
+        <div class="font-body2">
+            <div class="x-padding-element-bottom-grid-step font-caption-colored">Notify</div>
+            <p>You will be notified via push notification whenever this filter detects a new coin (if this option is enabled).</p>
+            <div class="x-padding-element"></div>
+            <div class="x-padding-element-bottom-grid-step font-caption-colored">For example</div>
+            <p>The last reported filter result contains Bitcoin and Ethereum.</p>
+            <p>The new filter result contains Bitcoin, Ethereum and XRP.</p>
+            <p>You would be notified that XRP now fullfill your conditions.</p>
+            <div class="x-padding-element"></div>
+            <div class="x-padding-element-bottom-grid-step font-caption-colored">Only for pro users</div>
+            <p>Automatic cloud calculations (and therefore also notifications) are only executed for pro users.</p>
+        </div>
+    </ng-template>
+
+    <div class="x-padding-element"></div>
+
+    <div class="x-flex-row x-padding-element">
+        <div class="width-left-element x-padding-element font-body2">Notify me</div>
+        <label class="x-flex-element-grow x-overflow-text">
+            <mat-slide-toggle [color]="'primary'" [formControl]="notifyControl"></mat-slide-toggle>
+        </label>
+        <div class="x-padding-element-left"> </div>
+        <div class="width-right-element x-padding-element" matRipple (click)="openDialogNotifyInfo(InfoBoxNotify)">
+            <mat-icon class="x-icon-small">{{icons.info}}</mat-icon>
+        </div>
+    </div>
+
+    <div class="x-padding-element"></div>
+</ng-container>
+
+
+<div class="x-padding-element-left-right x-padding-element-top" >
+    <div class="info-card-container">
+        <app-info-card [errors$]="errorMsgAll$" [isPro]="isPro$ | async"></app-info-card>
+    </div>
+</div>
+<app-fab-button [isDisabled$]="isScanInvalid$" [icon]="icons.commitChange" (clickedAndEnabled)="onClickAtFab()"></app-fab-button>

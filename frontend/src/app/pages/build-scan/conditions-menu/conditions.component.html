@@ -1,0 +1,55 @@
+<app-bar-normal
+        [title]=pageTitle
+        [iconLeft]="icons.clear"
+        (clickOnGivenElement)="onClickAtAppBar($event)">
+</app-bar-normal>
+
+<div class="x-padding-element-double">
+    <div class="x-padding-element"></div>
+    <div class="x-padding-element-left font-sub2">Filter the market based on the following conditions</div>
+    <div class="x-padding-element-left x-padding-element-top font-caption-colored">(click on a condition to modify it)</div>
+    <div class="x-padding-element"></div>
+</div>
+<div class="x-padding-element-left-right-double">
+    <mat-divider class="x-divider-section-left-free"></mat-divider>
+</div>
+
+<ng-container *ngIf="conditionService.conditions$ | async as conditions">
+    <div *ngFor="let condition of conditions; trackBy: checkIfConditionHasChanged; let idx=index;">
+        <div class="x-padding-element-left-right-double x-padding-element-top-bottom" matRipple (click)="goToModify(idx)">
+            <div class="animate-fade-in">
+                <app-condition-header [condition]="condition"></app-condition-header>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+
+<div class="x-padding-element-left-right">
+    <mat-divider class="x-divider-section-left-free"></mat-divider>
+</div>
+
+<ng-container *ngIf="{reason: restrictionReason$ | async} as reasonObj">
+
+    <ng-template #ShowError>
+        <app-list-element-icon
+                [icon]="icons.info"
+                [disableRipple]="true">
+            <div class="font-caption">{{reasonObj.reason}}</div>
+        </app-list-element-icon>
+    </ng-template>
+
+
+    <ng-template #Add>
+        <app-list-element-icon-and-text
+                [icon]="icons.add"
+                [title]="'Add new condition'"
+                [callback]="conditionService.add">
+        </app-list-element-icon-and-text>
+    </ng-template>
+
+    <ng-container *ngIf="reasonObj.reason === '';then Add else ShowError"></ng-container>
+
+    <app-fab-button-secondary icon="check" isOnlyButton="true" (clickedAndEnabled)="updateAndReturn()"></app-fab-button-secondary>
+
+</ng-container>

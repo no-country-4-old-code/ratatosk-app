@@ -1,0 +1,10 @@
+@import "src/styles/basic/size/list_element_heigth";
+$font-position-correction: 1.5px;
+
+.font-position-correction {
+  padding-top: $font-position-correction;
+}
+
+.min-height {
+  min-height: $list-element-height-mini;
+}

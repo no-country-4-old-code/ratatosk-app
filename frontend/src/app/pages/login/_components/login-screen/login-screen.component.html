@@ -1,0 +1,259 @@
+<ng-container *ngIf="authProcess.user$ | async as user; else showForm">
+    <div fxLayout="row" fxLayoutAlign="center center">
+        <ngx-auth-firebaseui-email-confirmation
+                (signOut)="signOut()"
+                [email]="user.email"
+                [goBackURL]="goBackURL"
+                [messageOnEmailConfirmationSuccess]="messageOnEmailConfirmationSuccess"
+                [sendNewVerificationEmailText]="sendNewVerificationEmailText"
+                [signOutText]="signOutText"
+                [template]="verifyEmailTemplate"
+                [verifyEmailConfirmationText]="verifyEmailConfirmationText"
+                [verifyEmailGoBackText]="verifyEmailGoBackText"
+                [verifyEmailTitleText]="verifyEmailTitleText">
+        </ngx-auth-firebaseui-email-confirmation>
+    </div>
+</ng-container>
+
+<ng-template #showForm>
+
+    <div class="mat-tab-shadow-element"></div>
+
+    <mat-tab-group (selectedTabChange)="onTabChange($event)" [color]="tabsColor" [selectedIndex]="tabIndexSubject | async">
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <div style="width: 92px" (click)="tabIndexSubject.next(0)">
+                    {{tabNameLogin}}
+                </div>
+            </ng-template>
+
+            <div class="tab-height-max x-padding-element-double" (swipe)="swipeTabs($event)">
+                <div class="x-padding-element"></div>
+                <div class="x-center-content">
+                    <div>
+                        <form (ngSubmit)="signInAndMoveToMainMenu()"
+                              [formGroup]="signInFormGroup" id="loginForm">
+                            <div>
+                                <div class="x-center-content x-padding-element-top-bottom">
+                                    <mat-form-field [appearance]="appearance">
+                                        <mat-label>{{emailText}}</mat-label>
+                                        <input formControlName="email" matInput required>
+                                        <mat-icon matSuffix></mat-icon>
+                                        <mat-error *ngIf="signInEmailFormControl.hasError('required')">
+                                            {{emailErrorRequiredText}}
+                                        </mat-error>
+                                        <mat-error *ngIf="signInEmailFormControl.hasError('pattern')">
+                                            {{emailErrorPatternText}}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="x-center-content x-padding-element-bottom">
+                                    <mat-form-field
+                                            [appearance]="appearance">
+                                        <mat-label>{{passwordText}}</mat-label>
+                                        <input [maxlength]="max" [minlength]="min" [type]="togglePass.type" formControlName="password" matInput
+                                               required/>
+                                        <mat-pass-toggle-visibility #togglePass matSuffix></mat-pass-toggle-visibility>
+                                        <mat-hint align="end" aria-live="polite"> {{ signInFormGroup.value.password.length }}
+                                            / {{ max }} </mat-hint>
+                                        <mat-error *ngIf="sigInPasswordFormControl.hasError('required')">
+                                            {{passwordErrorRequiredText}}
+                                        </mat-error>
+                                        <mat-error *ngIf="sigInPasswordFormControl.hasError('minlength')">
+                                            {{ passwordErrorMinLengthText }}
+                                        </mat-error>
+                                        <mat-error *ngIf="sigInPasswordFormControl.hasError('maxlength')">
+                                            {{ passwordErrorMaxLengthText }}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="x-center-content" fxLayoutAlign="center">
+                            <button (click)="openResetPasswordTab()"
+                                    *ngIf="resetPasswordEnabled"
+                                    [color]="'accent'"
+                                    class="space-top"
+                                    mat-button>
+                                {{forgotPasswordButtonText}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fixed-fab x-padding-element-double">
+                    <button form="loginForm" mat-fab color="primary" type="submit" [disabled]="signInFormGroup.invalid">
+                        <mat-icon>{{iconLogin}}</mat-icon>
+                    </button>
+                </div>
+                <mat-card-footer *ngIf="isLoading">
+                    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                </mat-card-footer>
+            </div>
+
+        </mat-tab>
+
+        <mat-tab *ngIf="registrationEnabled">
+            <ng-template mat-tab-label>
+                <div style="width: 92px" (click)="tabIndexSubject.next(1)">
+                    {{registerTabText}}
+                </div>
+            </ng-template>
+
+            <div class="tab-height-max x-padding-element-double" (swipe)="swipeTabs($event)">
+                <div class="x-padding-element"></div>
+                    <form (ngSubmit)="signUpFormGroup.valid && processLegalSignUP(authProvider.EmailAndPassword)"
+                          [formGroup]="signUpFormGroup" id="signUpForm">
+                        <div class="x-center-content">
+                            <div>
+                                <div class="x-padding-element-top-bottom">
+                                    <mat-form-field [appearance]="appearance">
+                                        <mat-label>{{emailText}}</mat-label>
+                                        <input [formControl]="sigUpEmailFormControl"
+                                               matInput
+                                               required
+                                               type="email">
+                                        <mat-icon matSuffix></mat-icon>
+                                        <mat-error *ngIf="sigUpEmailFormControl.hasError('required')">
+                                            {{emailErrorRequiredText}}
+                                        </mat-error>
+                                        <mat-error *ngIf="sigUpEmailFormControl.hasError('pattern')">
+                                            {{emailErrorPatternText}}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="x-padding-element-bottom">
+                                    <mat-form-field [appearance]="appearance">
+                                        <mat-label>{{passwordText}}</mat-label>
+                                        <input
+                                                [formControl]="sigUpPasswordFormControl"
+                                                [maxlength]="max"
+                                                [minlength]="min"
+                                                [type]="toggle.type"
+                                                matInput
+                                                name="password"
+                                                required
+                                        />
+                                        <mat-pass-toggle-visibility #toggle matSuffix></mat-pass-toggle-visibility>
+                                        <mat-hint align="end" aria-live="polite">
+                                            {{signUpFormGroup.value.password?.length}} / {{ max }}
+                                        </mat-hint>
+
+                                        <mat-error *ngIf="sigUpPasswordFormControl.hasError('required')" class="cut-text">
+                                            {{passwordErrorRequiredText}}
+                                        </mat-error>
+
+                                        <mat-error *ngIf="sigUpPasswordFormControl.hasError('minlength')" class="cut-text">
+                                            {{ passwordErrorMinLengthText }}
+                                        </mat-error>
+                                        <mat-error *ngIf="sigUpPasswordFormControl.hasError('maxlength')" class="cut-text">
+                                            {{ passwordErrorMaxLengthText }}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="x-padding-element"></div>
+                        <div class="x-center-content">
+                            <div class="max-width-info x-padding-element-top-bottom x-padding-element-left font-caption">
+                                <label class="x-flex-row">
+                                    <mat-checkbox [color]="'primary'" (change)="updateCheckboxArray($event, 0)"></mat-checkbox>
+                                    <div class="x-padding-element"></div>
+                                    <div>I have read and agree to the
+                                        <a [routerLink]="linkToTerms" class="x-link-color">terms & conditions</a>, the
+                                        <a [routerLink]="linkToPolicy" class="x-link-color">privacy policy</a>,
+                                        the <a [routerLink]="linkToDisclaimer" class="x-link-color">disclaimer</a> and the
+                                        <a [routerLink]="linkToCookie" class="x-link-color">cookies policy</a>
+                                    </div>
+                                </label>
+
+                                <div class="x-padding-element"></div>
+
+                                <label class="x-flex-row">
+                                    <mat-checkbox [color]="'primary'" (change)="updateCheckboxArray($event, 1)"></mat-checkbox>
+                                    <div class="x-padding-element"></div>
+                                    <div>I am informed and understand that the
+                                        <a [routerLink]="linkToImpressum" class="x-link-color">Impressum / Imprint</a>
+                                        is always accessible via the <a [routerLink]="linkToMainMenu" class="x-link-color">main menu</a>
+                                    </div>
+                                </label>
+
+                                <div class="x-padding-element"></div>
+
+                                <label class="x-flex-row">
+                                    <mat-checkbox [color]="'primary'" (change)="updateCheckboxArray($event, 2)"></mat-checkbox>
+                                    <div class="x-padding-element"></div>
+                                    <div>
+                                        I agree to the use of reCAPTCHA for user verification according to the
+                                        <a href="https://policies.google.com/privacy" class="x-link-color">Privacy Policy</a> and
+                                        <a href="https://policies.google.com/terms" class="x-link-color">Terms of Service</a> of Google.
+                                    </div>
+                                </label>
+
+                                <div class="x-padding-element"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <mat-card-footer *ngIf="isLoading">
+                    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                </mat-card-footer>
+
+                <div class="fixed-fab x-padding-element-double">
+                    <button (click)="addNewUser($event)" mat-fab color="primary" [disabled]="signUpFormGroup.invalid || ! (areAllCheckboxesChecked$ | async)">
+                        <mat-icon>{{iconLogin}}</mat-icon>
+                    </button>
+                </div>
+
+        </mat-tab>
+
+        <!--Reset password tab-->
+        <mat-tab *ngIf="passwordResetWished" class="reset-password-tab">
+            <ng-template mat-tab-label>
+                <div style="width: 92px" (click)="tabIndexSubject.next(2)">
+                    {{tabNameReset}}
+                </div>
+            </ng-template>
+
+            <ng-template mat-tab-label>
+                {{ tabNameReset }}
+            </ng-template>
+            <div class="tab-height-max x-padding-element-double" (swipe)="swipeTabs($event)">
+                <div class="x-padding-element"></div>
+                <div class="x-center-content">
+                    <form (ngSubmit)="resetPasswordFormGroup.valid && resetPassword()" [formGroup]="resetPasswordFormGroup">
+                        <div class="x-padding-element-top-bottom">
+                            <mat-form-field [appearance]="appearance"
+                                            class="full-width">
+                                <mat-label> {{ emailText }} </mat-label>
+                                <input [title]="resetPasswordInputText"
+                                       formControlName="email"
+                                       matInput
+                                       required>
+                                <mat-icon matSuffix></mat-icon>
+                                <mat-error *ngIf="resetPasswordEmailFormControl.hasError('required')">
+                                    {{resetPasswordErrorRequiredText}}
+                                </mat-error>
+                                <mat-error *ngIf="resetPasswordEmailFormControl.hasError('pattern')">
+                                    {{resetPasswordErrorPatternText}}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <p *ngIf="passReset">{{resetPasswordInstructionsText}}</p>
+
+                        <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+                        <div class="x-padding-element-top-bottom x-center-content">
+                            <button
+                                    [color]="color"
+                                    mat-raised-button
+                                    type="submit">
+                                {{resetPasswordActionButtonText}}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</ng-template>

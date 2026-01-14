@@ -1,0 +1,51 @@
+
+<div class="x-center-content">
+    <div class="x-center-text">
+        <div class="x-padding-element-double"></div>
+        <ng-container *ngIf="auth.user | async as auth">
+
+            <ng-container *ngIf="auth.emailVerified; then EmailVerified else EmailNotVerified"></ng-container>
+
+            <ng-template #EmailVerified>
+                <app-bar-return [title]="pageTitle" [disableMenu]="false"></app-bar-return>
+                <ng-container *ngTemplateOutlet="Screen;context: {auth: auth, content: contentVerified}"></ng-container>
+            </ng-template>
+
+            <ng-template #EmailNotVerified>
+                <app-bar-return [title]="pageTitle" [disableMenu]="false"></app-bar-return>
+                <ng-container *ngIf="reload$ | async"></ng-container>
+                <div (click)="reload()">
+                    <ng-container *ngTemplateOutlet="Screen;context: {auth: auth, content: contentNotVerified}"></ng-container>
+                </div>
+            </ng-template>
+
+            <app-fab-button-secondary
+                    [icon]="icons.delete"
+                    (clickedAndEnabled)="triggerDeleteAccount()">
+            </app-fab-button-secondary>
+
+        </ng-container>
+        <div class="x-padding-element"></div>
+    </div>
+
+
+    <app-fab-button
+            [icon]="icons.logout"
+            (clickedAndEnabled)="signOut()">
+    </app-fab-button>
+</div>
+
+<ng-template #Screen let-auth="auth" let-content="content">
+        <div class="flex-column">
+            <div class="x-padding-element font-sub1 font-colored">{{content.header}}</div>
+            <div class="x-padding-element-double font-title">{{auth.email}}</div>
+            <div class="x-padding-element-double"></div>
+            <ng-container *ngFor="let option of content.options">
+                <app-list-element-icon-and-text
+                        [icon]="option.icon"
+                        [title]="option.title"
+                        [callback]="option.callback">
+                </app-list-element-icon-and-text>
+            </ng-container>
+        </div>
+</ng-template>

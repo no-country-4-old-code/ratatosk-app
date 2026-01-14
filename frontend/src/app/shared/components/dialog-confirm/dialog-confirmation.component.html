@@ -1,0 +1,7 @@
+<div mat-dialog-title class="font-sub1">Confirm</div>
+<div mat-dialog-content class="line-breaks x-padding-element">{{data.dialog}}</div>
+<div class="x-padding-element"></div>
+<div class="x-padding-element">
+    <button class="float-right x-padding-element-left" mat-button [mat-dialog-close]="true" cdkFocusInitial>Ok</button>
+    <button class="float-right" mat-button [mat-dialog-close]="false">Cancel</button>
+</div>

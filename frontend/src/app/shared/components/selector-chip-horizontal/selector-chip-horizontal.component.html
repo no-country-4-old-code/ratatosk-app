@@ -1,0 +1,11 @@
+<div class="padding-correction x-list-element x-scrolling-horizontal-wrapper">
+    <ng-container *ngIf="selectedChips$ | async as selected">
+      <div *ngFor="let chip of chips$ | async; let i = index"
+           matRipple
+           class="x-border-radius-min element x-scrolling-horizontal-element font-button"
+           [ngStyle]="{'border': '1px solid var(' + chip.color + ')'}"
+           (click)="onElementSelection(chip, selected)">
+        {{chip.text}}
+      </div>
+    </ng-container>
+</div>

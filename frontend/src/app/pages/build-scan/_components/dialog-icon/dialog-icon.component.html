@@ -1,0 +1,12 @@
+<div mat-dialog-title class="font-sub1">Select filter icon</div>
+<div class="x-padding-element"></div>
+<div mat-dialog-content>
+    <div class="x-flex-row-space-evenly-wrap">
+        <ng-container *ngFor="let id of iconIds">
+            <div class="x-padding-element" [mat-dialog-close]="id">
+                <img class="x-padding-element x-border-radius-min x-icon-extra-large color-card" [src]=lookup[id]>
+            </div>
+        </ng-container>
+    </div>
+</div>
+<div class="x-padding-element"></div>

@@ -1,0 +1,1 @@
+export type FillFunction<KEY, CONTENT> = (key: KEY, idx: number) => CONTENT;

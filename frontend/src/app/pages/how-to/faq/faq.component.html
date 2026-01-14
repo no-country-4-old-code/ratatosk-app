@@ -1,0 +1,11 @@
+<app-bar-normal
+        [title]=title
+        [iconLeft]=iconBack
+        (clickOnGivenElement)="location.back()">
+</app-bar-normal>
+
+<div class="x-center-content">
+    <div class="x-padding-element-double x-max-screen-width">
+        <app-documentation-multiple [doc]="doc"></app-documentation-multiple>
+    </div>
+</div>

@@ -1,0 +1,5 @@
+<div class="fixed-fab x-padding-element-double" *ngIf="isDisabledObj$ | async as obj">
+        <button mat-fab color="primary" [disabled]="obj.isDisabled" (click)="onClick(obj.isDisabled)">
+            <mat-icon>{{icon}}</mat-icon>
+        </button>
+</div>

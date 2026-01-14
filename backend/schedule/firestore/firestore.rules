@@ -1,0 +1,10 @@
+rules_version = '2';
+// Ref: https://firebase.google.com/docs/reference/rules/rules.List#hasOnly
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+      match /{allPaths=**} {
+          allow read : if false;
+      }
+  }
+}

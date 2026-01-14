@@ -1,0 +1,7 @@
+** do in mobile and pc format
+
+- Navigation
+    - Page should open /legal-notes
+    - Page should open Nav. Menu
+    - Page should open every sub page [terms of use, legal disclosure, private policy ] + allow back navigation
+

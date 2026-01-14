@@ -1,0 +1,16 @@
+@import "vars";
+@import "../size/vars";
+
+
+.x-divider-category {
+  border-color: $divider-category-color !important;
+}
+
+.x-divider-margin {
+  margin: 0 32px !important;
+}
+
+.x-divider-section-left-free {
+  @include respond-to(small-screen) { margin-left: $grid-left-section-width-small !important;}
+  @include respond-to(handhelds) { margin-left: $grid-left-section-width-medium !important;}
+}

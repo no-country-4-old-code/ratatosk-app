@@ -1,0 +1,31 @@
+** do in mobile and pc format
+
+- start as DemoUser
+
+- Navigation
+    - Page should open /login
+    - Go to "Register" + back to login
+    - Go to "Reset password" + back to login
+    - Generate new user -> should navigate to "verification"
+    - Loout -> show login screen
+    - Register same user -> nop
+    - Login with user -> Logout screen
+    - Delete user -> Login screen
+    - Try to Login with user -> nop
+
+- Pro version
+    - Login with pro version account
+    - try to delete account -> fail
+    - cancel pro version
+    - try to delete account -> succed // complete delete not necassary
+
+- Verififcation
+    - Go to login
+    - create user
+    - check verification mail
+    - resend verififcation mail
+    - check if two verification mails
+    - activate second mail
+    - wait till change to real user (! no click etc. should be needed)
+
+

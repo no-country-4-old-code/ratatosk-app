@@ -1,0 +1,8 @@
+<app-basic-bar
+  [iconLeft]="icons.back"
+  [disableElevation]="disableElevation"
+  (clickOnGivenElement)="onClickEmitReturn($event)">
+
+  <app-search class="x-flex-element-grow" (keyUpSearch)="onKeyUpEmitTerm($event)"></app-search>
+
+</app-basic-bar>

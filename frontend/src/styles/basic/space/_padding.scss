@@ -1,0 +1,53 @@
+@import "vars";
+
+.x-padding-element {
+  padding: $padding-element;
+}
+
+.x-padding-element-double {
+  padding: $padding-element-double;
+}
+
+.x-padding-element-left {
+  padding-left: $padding-element;
+}
+
+.x-padding-element-right {
+  padding-right: $padding-element;
+}
+
+.x-padding-element-left-right {
+  padding-left: $padding-element;
+  padding-right: $padding-element;
+}
+
+.x-padding-element-left-right-double {
+  // standard style to include list elements
+  padding-left: $padding-element-double;
+  padding-right: $padding-element-double;
+}
+
+.x-padding-element-top {
+  padding-top: $padding-element;
+}
+
+.x-padding-element-bottom {
+  padding-bottom: $padding-element;
+}
+
+.x-padding-element-bottom-grid-step {
+  // standard for small headlines / chapters
+  padding-bottom: $grid-step;
+}
+
+.x-padding-element-top-bottom {
+  padding-top: $padding-element;
+  padding-bottom: $padding-element;
+}
+
+.x-padding-element-top-bottom-double {
+  padding-top: $padding-element-double;
+  padding-bottom: $padding-element-double;
+}
+
+

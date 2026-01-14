@@ -1,0 +1,19 @@
+@import "vars";
+
+@mixin respond-to($media) {
+  @if $media == small-screen {
+    @media only screen and (max-width: $break-mobil-landscape) { @content; }
+  }
+  @if $media == handhelds {
+    @media only screen and (min-width: $break-mobil-landscape) { @content; }
+  }
+  @else if $media == medium-screens {
+    @media only screen and (min-width: $break-medium) { @content; }
+  }
+  @else if $media == large-screens {
+    @media only screen and (min-width: $break-large) { @content; }
+  }
+  @else if $media == full-hd-screens {
+    @media only screen and (min-width: $break-full-hd) { @content; }
+  }
+}

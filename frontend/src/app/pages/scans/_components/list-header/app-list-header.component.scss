@@ -1,0 +1,9 @@
+@import "src/styles/basic/size/vars";
+
+.height-of-list-header {
+  height: $list-header-height;
+}
+
+.inner-element {
+  display: inline-block;
+}

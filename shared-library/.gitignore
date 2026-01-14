@@ -1,0 +1,9 @@
+node_modules
+firebase-projects.ts
+dist
+.idea
+
+*.js
+*.js.map
+
+

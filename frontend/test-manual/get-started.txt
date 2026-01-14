@@ -1,0 +1,9 @@
+** do in mobile and pc format
+
+- Navigation
+    - Page should open
+    - Open every subpage + go back
+        [view, portfolio, functions, attributes, other, faq]
+    - Open every extendable document and check if content is valid on [functions, attributes, other, faq]
+    
+- add unittest to see how documents.ts gets docs

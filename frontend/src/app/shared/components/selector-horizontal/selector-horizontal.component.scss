@@ -1,0 +1,14 @@
+@import "../../../../styles/special/list_element";
+@import "../../../../styles/basic/space/vars";
+@import "../../../../styles/basic/size/vars";
+
+.element {
+  min-width: $length-8;
+  padding: $padding-element;
+  text-align: center;
+}
+
+.padding-correction {
+  padding-left: $list-element-padding - $padding-element;
+}
+

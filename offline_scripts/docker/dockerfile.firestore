@@ -1,0 +1,20 @@
+FROM node:lts-alpine
+
+ARG PATH_TO_FIRESTORE=/opt/firestore/
+
+RUN apk --no-cache add openjdk11-jre bash && \
+    yarn global add firebase-tools && \
+    yarn cache clean && \
+    firebase setup:emulators:database && \
+    firebase setup:emulators:firestore && \
+    firebase setup:emulators:pubsub && \
+    firebase -V && \
+    java -version && \
+    chown -R node:node $HOME
+
+WORKDIR $PATH_TO_FIRESTORE
+COPY package.json .
+RUN ls && apk add --no-cache --virtual build-dependencies make gcc g++ python && ls
+RUN cd $PATH_TO_FIRESTORE && npm install && ls && cd node_modules && ls -l && cd .. && chmod -R 755 node_modules && cd node_modules && ls -l
+RUN apk del build-dependencies
+

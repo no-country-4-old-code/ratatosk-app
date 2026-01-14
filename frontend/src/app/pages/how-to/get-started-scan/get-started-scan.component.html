@@ -1,0 +1,14 @@
+<app-bar-normal
+        [title]=title
+        [iconLeft]=iconBack
+        (clickOnGivenElement)="location.back()">
+</app-bar-normal>
+
+<div class="x-padding-element-left-right x-center-content">
+    <div class="x-padding-element-double x-max-screen-width">
+        <ng-container *ngFor="let doc of documentations">
+            <app-documentation-multiple [doc]="doc"></app-documentation-multiple>
+            <div class="x-padding-element"></div>
+        </ng-container>
+    </div>
+</div>

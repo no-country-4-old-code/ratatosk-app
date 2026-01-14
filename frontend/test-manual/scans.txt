@@ -1,0 +1,55 @@
+** do in mobile and pc format
+
+- start as DemoUser
+
+- Navigation
+    - Page should open : should show Overview
+    - Click on view : should show View
+    - Click on coin : should show detailScreen
+    - Back to View
+    - Click Modify : should show Modify View with View loaded
+    - Click Cancel : should open View
+    - Click Modify : should show Modify View with View loaded
+    - Click Icon : Load Icon
+    - Click PreSelection, Condition, Notify, Load Dialogs --> should open
+    - Click Commit -> should open View
+    - Click back --> should open Overview
+    - Click add View -> should open Modify with default Condition loaded
+    - Click Condition -> should open COndtion
+    - Click back
+    - Click cancel -> should open Overview
+
+- Role check:
+    - As Demo user --> should not modify or create views; should not modify settings
+    - As User --> should not exceed 5 views
+    - As Pro User -> should not exceed 20 views
+
+- Lifetime of one View:
+    - Click on add new view
+    - Enter name -> Foba + random
+    - Enter Icon -> random
+    - Enter preselection to 3
+    - Commit
+    - Should load view and have 3 coins inside
+    - Back to overiew -> should be 4 views now
+    - Click on View -> Modify (increase coin number to 4)
+    - Cancel -> nothing changed
+    - Click on View -> Modify (increase coin number to 5)
+    - Commit
+    - Should load view and have 5 coins inside
+    - Back to overview -> should be still 4 views
+    - click on view -> delete view
+    - Should be back on overview
+    - Should be 3 views now
+
+- Check recalculation
+    - Add view with select 5 coin ids
+    - Add another view with 3 coin ids
+    - Overview should show 5 views now
+    - Select view number 4 and delete it
+    - Check if view with 3 coins, still show only 3 coins
+
+- Condition view
+    - Click on add new view and open condition 
+    - play with conditions (check if view updated and so on)
+

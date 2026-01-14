@@ -1,0 +1,391 @@
+image: node:lts-alpine
+
+# scripts
+
+UpdateVersionNumberScript: &UpdateVersionNumberScript
+  PATH_TO_VERSION_FILE=shared-library/src/settings/version.ts &&
+  BUILD_TIMESTAMP=$(date +%Y-%m-%d) &&
+  echo -e "" \
+  "/*This file is automatic generated during master bitbucket pipeline. All manual changes will be overwritten */" \
+  "\nexport const appVersion = '${BUILD_TIMESTAMP}';" \
+  "\nexport const appVersionBuildNumber = '${BITBUCKET_BUILD_NUMBER}';\n" \
+  > $PATH_TO_VERSION_FILE &&
+  cat $PATH_TO_VERSION_FILE &&
+  INTERNAL_RELEASE_VERSION="${BUILD_TIMESTAMP} - ${BITBUCKET_BUILD_NUMBER}"
+
+RunEslintFixScript: &RunEslintFixScript
+  cd backend/user/firestore &&
+  ln -s /opt/firestore/node_modules/ node_modules &&
+  npm run lint &&
+  cd ../functions &&
+  npm run lint &&
+  cd ../../schedule/functions &&
+  npm run lint &&
+  cd ../../shared-backend-library &&
+  npm run lint &&
+  cd ../../shared-library &&
+  npm run lint &&
+  cd ../frontend &&
+  npm run lint &&
+  cd ..
+
+SetProjectToInternalScript: &SetProjectToInternalScript
+  cd frontend &&
+  npm run set-project-to-internal &&
+  cd ..
+
+SetProjectToPublicScript: &SetProjectToPublicScript
+  cd frontend &&
+  npm run set-project-to-public &&
+  cd ..
+
+LinkFirestoreRulesScript: &LinkFirestoreRulesScript
+  cd backend/user/firestore &&
+  ln -s /opt/firestore/node_modules/ node_modules &&
+  cd ../../..
+
+RunDeployScript: &RunDeployScript
+  cd $DIR_PATH &&
+  firebase deploy --debug --config $FIREBASE_CONFIG_JSON --token=$FIREBASE_AUTH_TOKEN --project $FIRBASE_PROJECT_ID --non-interactive
+
+# other
+
+CachesAndImageOfDeploy: &CachesAndImageOfDeploy
+  image: ratatosk42/fire:latest
+  caches:
+    - node-frontend
+    - node-shared-library
+    - node-backend-user-functions
+    - node-backend-schedule-functions
+    - node-backend-shared
+
+
+# steps
+
+InstallNodeModulesStep: &InstallNodeModulesStep
+  step:
+    name: Install node modules
+    caches:
+      - node-frontend
+      - node-shared-library
+      - node-backend-user-functions
+      - node-backend-schedule-functions
+      - node-backend-shared
+    script:
+      - cd frontend && npm install && cd ..
+      - cd shared-library && npm install && cd ..
+      - cd backend/user/functions && npm install && cd ../../..
+      - cd backend/schedule/functions && npm install && cd ../../..
+      - cd backend/shared-backend-library && npm install && cd ../..
+      - echo "npm install for firestore is done in docker file because of dependency trouble. Node modules are soft linked."
+
+RunTestsStep_Internal: &RunTestsStep_Internal
+  parallel:
+    - step:
+        name: Test frontend
+        image: ratatosk42/chrome:latest
+        caches:
+          - node-frontend
+          - node-shared-library
+        script:
+          - cd frontend
+          - npm run set-project-to-internal
+          - npm run all
+
+    - step:
+        name: Test shared library
+        image: ratatosk42/git:latest
+        caches:
+          - node-shared-library
+        script:
+          - cd shared-library
+          - npm run set-project-to-internal
+          - npm run all
+
+    - step:
+        name: Test backend user - firestore rules
+        image: ratatosk42/fire:latest
+        caches:
+          - node-shared-library
+        script:
+          - cd backend/user/firestore
+          - ln -s /opt/firestore/node_modules/ node_modules
+          - npm run set-project-to-internal
+          - npm run all
+
+    - step:
+        name: Test backend user - cloud functions
+        caches:
+          - node-backend-user-functions
+          - node-shared-library
+          - node-backend-shared
+        image: ratatosk42/git:latest
+        script:
+          - cd backend/user/functions
+          - npm run set-project-to-internal
+          - npm run all
+
+    - step:
+        name: Test backend schedule - cloud functions
+        caches:
+          - node-backend-schedule-functions
+          - node-shared-library
+          - node-backend-shared
+        image: ratatosk42/git:latest
+        script:
+          - cd backend/schedule/functions
+          - npm run set-project-to-internal
+          - npm run all
+
+    - step:
+        name: Test backend shared library
+        caches:
+          - node-backend-shared
+          - node-shared-library
+        image: ratatosk42/git:latest
+        script:
+          - cd backend/shared-backend-library
+          - npm run set-project-to-internal
+          - npm run all
+
+
+RunTestsStep_Public: &RunTestsStep_Public
+  parallel:
+    - step:
+        name: Test frontend
+        image: ratatosk42/chrome:latest
+        caches:
+          - node-frontend
+          - node-shared-library
+        script:
+          - cd frontend
+          - npm run set-project-to-public
+          - npm run all
+
+    - step:
+        name: Test shared library
+        image: ratatosk42/git:latest
+        caches:
+          - node-shared-library
+        script:
+          - cd shared-library
+          - npm run set-project-to-public
+          - npm run all
+
+    - step:
+        name: Test backend user - firestore rules
+        image: ratatosk42/fire:latest
+        caches:
+          - node-shared-library
+        script:
+          - cd backend/user/firestore
+          - ln -s /opt/firestore/node_modules/ node_modules
+          - npm run set-project-to-public
+          - npm run all
+
+    - step:
+        name: Test backend user - cloud functions
+        caches:
+          - node-backend-user-functions
+          - node-shared-library
+          - node-backend-shared
+        image: ratatosk42/git:latest
+        script:
+          - cd backend/user/functions
+          - npm run set-project-to-public
+          - npm run all
+
+    - step:
+        name: Test backend schedule - cloud functions
+        caches:
+          - node-backend-schedule-functions
+          - node-shared-library
+          - node-backend-shared
+        image: ratatosk42/git:latest
+        script:
+          - cd backend/schedule/functions
+          - npm run set-project-to-public
+          - npm run all
+
+    - step:
+        name: Test backend shared library
+        caches:
+          - node-backend-shared
+          - node-shared-library
+        image: ratatosk42/git:latest
+        script:
+          - cd backend/shared-backend-library
+          - npm run set-project-to-internal
+          - npm run all
+
+
+IncreaseVersionStep: &IncreaseVersionStep
+  step:
+    image: ratatosk42/git:latest
+    name: Update version number & eslint
+    caches:
+      - node-frontend
+      - node-shared-library
+      - node-backend-user-functions
+      - node-backend-schedule-functions
+      - node-backend-shared
+    script:
+      - *UpdateVersionNumberScript
+      - *SetProjectToInternalScript
+      - *RunEslintFixScript
+      - cd frontend/ && npm run test && cd .. # check if increase of build number destroy anything in frontend
+      - git commit -am "[skip ci] Internal release version ${INTERNAL_RELEASE_VERSION}" # do NOT remove [skip ci] -> trigger endless loop
+      - git push
+
+DeployInternalScheduleStep: &DeployInternalScheduleStep
+  step:
+    name: Deploy internal SCHEDULE
+    deployment: INTERNAL_BACKEND_SCHEDULE
+    <<: *CachesAndImageOfDeploy
+    script:
+      - FIRBASE_PROJECT_ID=schedule-ratatosk-dev
+      - FIREBASE_CONFIG_JSON=schedule/firebase.json
+      - FIREBASE_AUTH_TOKEN=$FIREBASE_INTERNAL_RELEASE
+      - DIR_PATH=backend
+      - *SetProjectToInternalScript
+      - *UpdateVersionNumberScript
+      - *RunEslintFixScript
+      - *LinkFirestoreRulesScript
+      - *RunDeployScript
+
+
+DeployInternalUserStep: &DeployInternalUserStep
+  step:
+    name: Deploy internal USER_001
+    deployment: INTERNAL_BACKEND_USER_001
+    <<: *CachesAndImageOfDeploy
+    script:
+      - FIRBASE_PROJECT_ID=user-001-ratatosk-dev
+      - FIREBASE_CONFIG_JSON=user/firebase.json
+      - FIREBASE_AUTH_TOKEN=$FIREBASE_INTERNAL_RELEASE
+      - DIR_PATH=backend
+      - *SetProjectToInternalScript
+      - *UpdateVersionNumberScript
+      - *RunEslintFixScript
+      - *LinkFirestoreRulesScript
+      - *RunDeployScript
+
+
+DeployInternalFrontendStep: &DeployInternalFrontendStep
+  step:
+    name: Deploy internal FRONTEND
+    deployment: INTERNAL_FRONTEND
+    <<: *CachesAndImageOfDeploy
+    script:
+      - FIRBASE_PROJECT_ID=ratatosk-webpage-dev
+      - FIREBASE_CONFIG_JSON=./firebase.json
+      - FIREBASE_AUTH_TOKEN=$FIREBASE_INTERNAL_RELEASE
+      - DIR_PATH=frontend
+      - *SetProjectToInternalScript
+      - *UpdateVersionNumberScript
+      - *RunEslintFixScript
+      - *LinkFirestoreRulesScript
+      - *RunDeployScript
+
+
+DeployPublicScheduleStep: &DeployPublicScheduleStep
+  step:
+    name: Deploy public SCHEDULE
+    deployment: PUBLIC_BACKEND_SCHEDULE
+    <<: *CachesAndImageOfDeploy
+    script:
+      - FIRBASE_PROJECT_ID=ratatosk-schedule
+      - FIREBASE_CONFIG_JSON=schedule/firebase.json
+      - FIREBASE_AUTH_TOKEN=$FIREBASE_PUBLIC_RELEASE
+      - DIR_PATH=backend
+      - *SetProjectToPublicScript
+      - *RunEslintFixScript
+      - *LinkFirestoreRulesScript
+      - *RunDeployScript
+
+
+DeployPublicUserStep: &DeployPublicUserStep
+  step:
+    name: Deploy public USER_001
+    deployment: PUBLIC_BACKEND_USER_001
+    <<: *CachesAndImageOfDeploy
+    script:
+      - FIRBASE_PROJECT_ID=ratatosk-user-001
+      - FIREBASE_CONFIG_JSON=user/firebase.json
+      - FIREBASE_AUTH_TOKEN=$FIREBASE_PUBLIC_RELEASE
+      - DIR_PATH=backend
+      - *SetProjectToPublicScript
+      - *RunEslintFixScript
+      - *LinkFirestoreRulesScript
+      - *RunDeployScript
+
+
+DeployPublicFrontendStep: &DeployPublicFrontendStep
+  step:
+    name: Deploy public FRONTEND
+    deployment: PUBLIC_FRONTEND
+    <<: *CachesAndImageOfDeploy
+    script:
+      - FIRBASE_PROJECT_ID=ratatosk-webpage
+      - FIREBASE_CONFIG_JSON=./firebase.json
+      - FIREBASE_AUTH_TOKEN=$FIREBASE_PUBLIC_RELEASE
+      - DIR_PATH=frontend
+      - *SetProjectToPublicScript
+      - *RunEslintFixScript
+      - *LinkFirestoreRulesScript
+      - *RunDeployScript
+
+
+
+# pipelines
+
+pipelines:
+
+  default:
+    - <<: *InstallNodeModulesStep
+    - <<: *RunTestsStep_Internal
+
+  pull-requests:
+    '**': #this runs as default for any branch not elsewhere defined
+      - <<: *InstallNodeModulesStep
+      - <<: *RunTestsStep_Internal
+
+  branches:
+
+    master:
+      - <<: *InstallNodeModulesStep
+      - <<: *RunTestsStep_Internal
+      - <<: *IncreaseVersionStep
+      # start deployment
+      - parallel:
+          - <<: *DeployInternalUserStep
+          - <<: *DeployInternalScheduleStep
+          - <<: *DeployInternalFrontendStep  # currently not working over bitbucket
+
+
+  custom: # pipelines that can only be triggered manually
+
+    releaseToPublic:
+      #- should only be executable for master branch
+      - <<: *InstallNodeModulesStep
+      - <<: *RunTestsStep_Public
+      # start deployment
+      - parallel:
+          - <<: *DeployPublicUserStep
+          - <<: *DeployPublicScheduleStep
+          - <<: *DeployPublicFrontendStep
+      - step:
+          name: Add release TAG
+          image: ratatosk42/git:latest
+          script:
+            - git tag -am "Tagging for release ${BITBUCKET_BUILD_NUMBER}" release-${BITBUCKET_BUILD_NUMBER}
+            - git push origin release-${BITBUCKET_BUILD_NUMBER}
+
+definitions:
+
+  caches:
+    node-shared-library: shared-library/node_modules
+    node-frontend: frontend/node_modules
+    node-backend-user-functions: backend/user/functions/node_modules
+    node-backend-schedule-functions: backend/schedule/functions/node_modules
+    node-backend-shared: backend/shared-backend-library/node_modules

@@ -1,0 +1,33 @@
+@import '../../../../../node_modules/@angular/material/theming';
+@import "src/styles/basic/space/vars";
+@import "src/styles/basic/size/vars";
+@import "src/styles/basic/grid/vars";
+@import "src/styles/special/fixed-after-app-bar";
+
+$mobil-min-width: 360px;
+$mobil-min-free-space: 56px;
+
+.overwrite-touch {
+  touch-action: pan-y !important;   // otherwise it is disabled in tabs
+}
+
+.tab-height-min {
+  height: 100vh;
+}
+
+.mat-tab-shadow-element {
+  height: $mat-tab-header-height;
+  width: 100%;
+}
+
+
+// reduce tab of icon "info"
+:host ::ng-deep.mat-tab-label, :host ::ng-deep.mat-tab-label-active{
+  min-width: 0!important;
+  padding: 0px!important;
+  margin: 0px!important;
+}
+
+:host ::ng-deep .mat-tab-header {
+  @extend .x-fixed-after-app-bar;
+}

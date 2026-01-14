@@ -1,0 +1,9 @@
+[{
+        "relation": ["delegate_permission/common.handle_all_urls"],
+        "target" : { "namespace": "android_app", "package_name": "app.ratatosk.twa",
+                     "sha256_cert_fingerprints": [
+                       "D9:8C:93:A3:A2:22:2A:3B:AA:60:06:1C:E0:24:33:CC:EC:20:82:6C:A7:8D:8B:67:60:53:04:2F:DC:52:BC:CF",
+                       "72:65:20:B6:F1:43:64:03:8D:B2:F6:4F:60:E9:57:4A:1E:BC:0B:03:F0:FF:23:68:46:F5:D2:F5:12:EC:2F:58"
+                     ] }
+      }
+]

@@ -1,0 +1,29 @@
+@import "../grid/vars";
+
+$length-mini : 18px; // special case, see material spec for icons
+$length-6: 6 * $grid-step;
+$length-8: 8 * $grid-step;
+$length-12: 12 * $grid-step;
+$length-14: 14 * $grid-step;
+$length-16: 16 * $grid-step;
+$length-18: 18 * $grid-step;
+
+$icon-size-mini: $length-mini;
+$icon-size-small: $length-6;
+$icon-size-medium: $length-8;
+$icon-size-large: $length-12;
+$icon-size-extra-large: $length-18;
+
+// see https://material.io/components/lists#specs
+$list-element-height-mini: $length-12; //   48 px - single line
+$list-element-height-small: $length-14; //  56 px - single line with image
+$list-element-height-medium: $length-16; // 64 px - double line (second line is small overline)
+$list-element-height-large: $length-18; //  72 px - double line
+
+// special sizes
+$app-bar-height: $list-element-height-small;
+$list-header-height: $list-element-height-medium;
+$mat-tab-header-height: $list-element-height-mini;
+
+$grid-left-section-width-small: $icon-size-small + $icon-size-medium + 2 * $grid-step;
+$grid-left-section-width-medium: $grid-left-section-width-small + 4 * $grid-step

@@ -1,0 +1,31 @@
+@import "mixin_compatibility";
+
+@mixin keyframes-simple-transition($name, $state-start, $state-end) {
+  @include keyframes-multi-platform($name) {
+    0% {
+      @include for-multi-platform(transform, $state-start);
+    }
+    100% {
+      @include for-multi-platform(transform, $state-end);
+    }
+  }
+}
+
+@mixin keyframes-multi-platform($name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+  @-ms-keyframes #{$name} {
+    @content;
+  }
+  @-o-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  }
+}
+

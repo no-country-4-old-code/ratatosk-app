@@ -1,0 +1,43 @@
+@import "src/styles/basic/grid/vars";
+@import "src/styles/basic/space/vars";
+@import "src/styles/basic/size/icons";
+
+$offset-x-caused-by-fab: 2 * $padding-element-double + $icon-size-medium + $padding-element;
+$offset-y-caused-by-fab: 2 * $padding-element-double + $icon-size-medium + $padding-element;
+$height-of-arrow-to-fab: 3px;
+
+.text_size_small {
+  font-size: 8px;
+}
+
+.container-relative {
+  position: relative;
+}
+
+.absolute-position-right {
+  position: absolute;
+  right: 0;
+}
+
+.absolute-position-for-hint-box {
+  position: fixed;
+  right: $offset-x-caused-by-fab;
+  bottom: $offset-x-caused-by-fab / 2 - $height-of-arrow-to-fab - $padding-element;
+}
+
+.arrow-body_to_checkbox {
+  /* Make sure your element is block level. Otherwise you can't transform it. */
+  border: solid var(--color-primary);
+  border-style: double dashed;
+  border-width: 0 100px 0 0;
+  padding: 1px;
+}
+
+.arrow_to_checkbox {
+  /* Make sure your element is block level. Otherwise you can't transform it. */
+  display: inline-block;
+  border: solid var(--color-primary);
+  border-width: 0 $height-of-arrow-to-fab $height-of-arrow-to-fab 0;
+  padding: $height-of-arrow-to-fab;
+  transform: rotate(-45deg);
+}

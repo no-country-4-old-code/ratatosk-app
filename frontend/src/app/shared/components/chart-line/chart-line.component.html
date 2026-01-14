@@ -1,0 +1,8 @@
+
+<div class="x-flex-row">
+    <svg #chart class="chart x-flex-element-grow"
+         [ngClass]="{'chart-size-medium': size === 'medium', 'chart-size-small': size === 'small'}"
+         (window:resize)="onResize()">
+    </svg>
+</div>
+

@@ -1,0 +1,56 @@
+<app-bar-normal
+        [title]=pageTitle
+        [iconLeft]="icons.clear"
+        (clickOnGivenElement)="onClickAtAppBar($event)">
+</app-bar-normal>
+
+<div class="x-padding-element-top"></div>
+
+<div class="x-padding-element-double">
+
+    <cdk-virtual-scroll-viewport orientation="horizontal" style="height: 200px" itemSize="32">
+        <div class="x-flex-row">
+            <ng-container *cdkVirtualFor="let group of iconGroups$ | async; templateCacheSize: 0">
+                <div class="x-flex-element-grow">
+                    <ng-container *ngFor="let icon of group">
+                        <div class="padding-extra-small">
+                            <img class="x-border-radius-max x-icon-small" [src]=icon>
+                        </div>
+                    </ng-container>
+                </div>
+            </ng-container>
+        </div>
+    </cdk-virtual-scroll-viewport>
+
+    <div class="x-list-element-height-medium">
+        <div>
+            <div class="x-padding-element-bottom-grid-step font-caption-colored">Info</div>
+            <div>This filter considers {{(ids$ | async).length}} of  {{idsAll.length}} available assets.</div>
+        </div>
+    </div>
+
+</div>
+
+<div class="x-padding-element-left-right">
+    <mat-divider class="x-divider-section-left-free"></mat-divider>
+</div>
+
+
+<div class="x-padding-element"></div>
+
+<ng-container *ngFor="let option of params">
+    <ng-container *ngIf="option.selected$ | async as selected">
+        <app-category-card
+                [description]=option.description
+                [iconSideOption]="icons.restoreDefault"
+                [content$]="option.content$"
+                (clickOnCard)="option.openDialog(selected)"
+                (clickOnSideOption)="reset(option.name)">
+        </app-category-card>
+    </ng-container>
+    <div class="x-padding-element-top"></div>
+</ng-container>
+
+<div class="x-padding-element"></div>
+
+<app-fab-button-secondary icon="check" isOnlyButton="true" (clickedAndEnabled)="updateAndReturn()"></app-fab-button-secondary>

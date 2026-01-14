@@ -1,0 +1,19 @@
+@import "src/styles/basic/space/vars";
+$padding-correction: 1px;
+
+.padding-title {
+  padding-top: $padding-element - $padding-correction;
+  padding-left: $padding-element;
+  padding-bottom: $padding-mini + $padding-correction;
+}
+
+.container {
+  position: absolute; // need external container whit position: relative
+  left: 0;
+  right: 0;
+  touch-action: pan-y !important; // needed to still scroll via touch
+}
+
+.hidden-element {
+  visibility: hidden;
+}

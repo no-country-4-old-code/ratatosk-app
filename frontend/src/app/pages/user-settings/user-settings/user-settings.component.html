@@ -1,0 +1,19 @@
+<app-bar-return [title]=title></app-bar-return>
+
+<div class="x-center-content font-body2">
+    <div class="x-padding-element-double x-max-screen-width x-flex-element-grow">
+        <div class="x-padding-element"></div>
+        <div class="x-padding-element-left-right x-padding-element-bottom font-caption-colored">General</div>
+
+        <ng-container *ngIf="currency$ | async as currency">
+            <div class="x-padding-element-left-right x-flex-row x-list-element-height-small"
+                 (click)="openDialogCurrency(currency)"
+                 matRipple>
+                <div class="width-left-element">Default currency</div>
+                <div class="x-padding-element x-flex-element-grow"></div>
+                <div class="x-padding-element x-overflow-text">{{currency | uppercase}}</div>
+            </div>
+        </ng-container>
+
+    </div>
+</div>

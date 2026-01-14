@@ -1,0 +1,14 @@
+<app-list-element-basic
+        [callback]="callback"
+        [disableRipple]="disableRipple"
+        [isHeightRestricted]="isHeightRestricted">
+
+    <div class="">
+        <div [class]=titleClass [innerHTML]="title"></div>
+        <ng-container *ngIf="subtext != undefined && subtext != empty">
+            <div class="x-padding-element-bottom-grid-step"></div>
+            <div [class]=subtextClass [innerHTML]="subtext"></div>
+        </ng-container>
+    </div>
+
+</app-list-element-basic>

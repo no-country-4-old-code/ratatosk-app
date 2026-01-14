@@ -1,0 +1,20 @@
+$height-of-bool-chart: 8px;
+$padding-correction-shift-icon: 1px;
+
+.padding-correction {
+  padding-top: 1px;
+}
+
+.padding-correction-icon {
+  padding-left: $padding-correction-shift-icon;
+  padding-right: 8px - $padding-correction-shift-icon;
+}
+
+.bool-chart-height {
+  height: $height-of-bool-chart;
+  background-color: green;
+}
+
+.chart-size-medium {
+  height:50vh;
+}

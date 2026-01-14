@@ -1,0 +1,28 @@
+
+<app-bar-normal
+        [iconRightSecond]="iconAppBarOptions"
+        [title]=pageTitle
+        (clickOnGivenElement)="openAppBarOptions($event)"
+        disableElevation="true">
+</app-bar-normal>
+
+<div class="mat-tab-shadow-element"></div>
+
+<mat-tab-group color="primary" [selectedIndex]="tabIndexSubject | async">
+
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <div style="width: 96px" (click)="tabIndexSubject.next(0)">
+                FILTERS
+            </div>
+        </ng-template>
+
+        <ng-template matTabContent>
+            <!-- matTabContent enables lazy loading -->
+            <div class="overwrite-touch tab-height-min" (swipe)="swipeTabs($event)">
+                <app-display-all-scans></app-display-all-scans>
+            </div>
+        </ng-template>
+    </mat-tab>
+
+</mat-tab-group>

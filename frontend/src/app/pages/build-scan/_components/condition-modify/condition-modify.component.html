@@ -1,0 +1,83 @@
+<app-bar-normal
+        [title]=pageTitle
+        [iconLeft]="icons.back"
+        (clickOnGivenElement)="onClickAtAppBar($event)">
+</app-bar-normal>
+
+<app-condition-charts [selectedCondition$]="condition$"></app-condition-charts>
+
+<ng-template #SelectorNormal let-selectorBlueprint="selector">
+    <app-selector-condition-option
+            [title]="selectorBlueprint.title"
+            [options$]="selectorBlueprint.options$"
+            [optionsInfos$]="selectorBlueprint.optionsInfo$"
+            [selected$]="selectorBlueprint.selected$"
+            [mapOption2String$]="selectorBlueprint.mapOption2String$"
+            (onSelection)="selectorBlueprint.onSelectionCallback($event)">
+    </app-selector-condition-option>
+</ng-template>
+
+<ng-template #SelectorFunction let-selectorBlueprint="selector" let-funcBlueprint="func" let-color="color">
+    <app-selector-modify-function
+            [selected$]="selectorBlueprint.selected$"
+            [mapOption2String$]="selectorBlueprint.mapOption2String$"
+            [functionBlueprint]="funcBlueprint"
+            [color]="color"
+            [metric]="selectorMetric.selected$ | async"
+            (onSelection)="selectorBlueprint.onSelectionCallback($event)">
+    </app-selector-modify-function>
+</ng-template>
+
+<ng-template #NoConditionsThere>
+    <div>No condition available</div>
+</ng-template>
+
+<ng-container *ngIf="(conditionService.conditions$ | async).length > 0; else NoConditionsThere">
+
+    <div class="x-padding-element"></div>
+
+    <div class="flex-box x-padding-element-left-right-double font-body2">
+
+        <div class="min-width-280px x-margin-element-right x-flex-element-grow x-overflow-text">
+            <ng-container *ngTemplateOutlet="SelectorFunction;context: {selector: selectorFunctionLeft, func: functionLeft$ | async, color: '--color-chart-0'}"></ng-container>
+        </div>
+
+        <div class="x-flex-element-grow x-padding-element x-center-content">
+            <div class="x-padding-element-right">should be</div>
+            <div class="x-flex-element-grow x-overflow-text">
+                <ng-container *ngTemplateOutlet="SelectorNormal;context: {selector: selectorCompare}"> </ng-container>
+            </div>
+            <div class="x-padding-element-left-right">than</div>
+        </div>
+
+        <div class="min-width-280px x-flex-element-grow x-overflow-text">
+            <ng-container *ngTemplateOutlet="SelectorFunction;context: {selector: selectorFunctionRight, func: functionRight$ | async, color: '--color-chart-1'}"> </ng-container>
+        </div>
+    </div>
+
+    <div class="x-padding-element-double"></div>
+
+    <div class="x-flex-row x-padding-element-left-right-double font-body2">
+        <div class="x-padding-element-left-right">Metric:</div>
+        <div class="x-padding-element-double"></div>
+        <div class="x-padding-element-right x-flex-element-grow max-width-280px">
+            <ng-container *ngTemplateOutlet="SelectorNormal;context: {selector: selectorMetric}"> </ng-container>
+        </div>
+        <div class="x-padding-element x-center-content font-caption">in</div>
+        <div class="x-padding-element x-center-content font-button">{{unitSymbol$ | async}}</div>
+    </div>
+
+    <div class="x-padding-element-double"></div>
+
+    <div class="x-padding-element-left-right">
+        <mat-divider class="x-divider-section-left-free"></mat-divider>
+    </div>
+
+    <app-list-element-icon-and-text
+            [icon]="icons.delete"
+            [title]="'Delete condition'"
+            [callback]="rmvConditionAndGoBack">
+    </app-list-element-icon-and-text>
+
+</ng-container>
+

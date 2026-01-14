@@ -1,0 +1,10 @@
+.idea
+node_modules
+tmp
+dist
+
+*.js
+*.js.map
+
+firestore-debug.log
+

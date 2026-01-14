@@ -1,0 +1,42 @@
+{
+  "name": "shared_library",
+  "private": true,
+  "version": "1.0.12",
+  "description": "",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "all": "npm run lint && npm run build-check && npm run test",
+    "test": "jasmine-ts --config=./test/jasmine.json",
+    "build-check": "npm run rm-dist && tsc --diagnostics && npm run rm-dist",
+    "lint": "eslint --fix \"src/**/*.ts\" \"test/**/*.ts\" && eslint \"src/**/*.ts\" \"test/**/*.ts\"",
+    "rm-dist": "rm -r -f ./dist",
+    "generate-token": "firebase login:ci",
+    "set-project-to-internal": "npm run func-set-project internal",
+    "set-project-to-public": "npm run func-set-project public",
+    "func-set-project": "func() { cd ..; ./setFirebaseProject.sh \"$1\"; }; func"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "peerDependencies": {},
+  "devDependencies": {
+    "@types/jasmine": "^3.5.1",
+    "@typescript-eslint/eslint-plugin": "^2.18.0",
+    "@typescript-eslint/parser": "^2.18.0",
+    "eslint": "^6.8.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-unused-imports": "^0.1.2",
+    "firestore-size": "^2.0.6",
+    "jasmine": "^3.9.0",
+    "jasmine-ts": "^0.4.0",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.7.5"
+  },
+  "dependencies": {
+    "@types/mathjs": "^6.0.9",
+    "@types/node": "^14.14.14",
+    "mathjs": "^8.1.0",
+    "firebase": "8.10.0"
+  }
+}

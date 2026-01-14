@@ -1,0 +1,98 @@
+rules_version = '2';
+// Ref: https://firebase.google.com/docs/reference/rules/rules.List#hasOnly
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /public/{whatever=**} {
+        allow get;
+    }
+
+    match /users/{userId} {
+        allow get: if isOwnDocument(userId) || isDemoReadAccess(userId);
+        allow update: if isOwnDocument(userId) && isUserDataValid();
+    }
+
+
+    // ------- FUNCTIONS ----------
+
+    function isOwnDocument(userId) {
+        return request.auth.uid == userId;
+    }
+
+    function isEmailVerified() {
+        // TODO: not used yet because of test issues -> update should be only allowed if email is verifed
+        return request.auth.token.email_verified;
+    }
+
+    function isDemoReadAccess(userId) {
+        return isDemoUserDocument(userId) && !userIsAuthenticated();
+    }
+
+    function isUserDataValid() {
+        return isUserDataMapValid() &&
+            isSettingsMapValid() &&
+            isNumberOfPushIdsValid() &&
+            isNumberOfScansValid() &&
+            isProUnchanged() &&
+            isFeedbackUnchanged();
+    }
+
+    // ----- helper
+
+    function isDemoUserDocument(userId) {
+        return userId == 'u7QidX0aLrcd0DJJttyzsxFjpDo1' || userId == 'vhXVS5Fko1aFCJNnU0A3c4zIIKi1';
+    }
+
+    function userIsAuthenticated() {
+        return request.auth != null;
+    }
+
+    function isNumberOfScansValid() {
+        return incomingData()['scans'].keys().size() <= 9;
+    }
+
+    function isNumberOfPushIdsValid() {
+        return incomingData()['pushIds'].size() <= 4;
+    }
+
+    function isUserDataMapValid() {
+        return hasKeys(incomingData(), ['scans', 'settings', 'pushIds', 'pro', 'lastUserActivity'], ['feedback']) &&
+            incomingData()['scans'] is map &&
+            incomingData()['settings'] is map &&
+            incomingData()['pushIds'] is list  &&
+            incomingData()['lastUserActivity'] == request.time &&
+            incomingData()['pro'] is map
+    }
+
+    function isSettingsMapValid() {
+        return hasKeys(incomingData()['settings'], ['currency'], []) &&
+            incomingData()['settings']['currency'] is string
+    }
+
+    function isProUnchanged() {
+        return ! hasAnyKeysAffected(['pro']);
+    }
+
+    function isFeedbackUnchanged() {
+        return ! hasAnyKeysAffected(['feedback']);
+    }
+
+    function incomingData() {
+        return request.resource.data;
+    }
+
+    function currentData() {
+        return resource.data;
+    }
+
+    function hasAnyKeysAffected(keys) {
+        // return true if coming data changes any of the data of the given keys
+        return incomingData().diff(currentData()).affectedKeys().hasAny(keys);
+    }
+
+    function hasKeys(map, keys_required, keys_optional) {
+        return map.keys().hasOnly(keys_required.concat(keys_optional)) && map.keys().hasAll(keys_required);
+    }
+  }
+}

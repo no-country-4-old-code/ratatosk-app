@@ -1,0 +1,42 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "module": "es2020",
+    "types": ["node"],
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "target": "es2015",
+    "allowSyntheticDefaultImports": true, // TODO: Remove after firebase ui is removed
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2019",
+      "dom"
+    ],
+    "baseUrl": "./src",
+    "paths": {
+      "@shared_comp/*": ["app/shared/components/*"],
+      "@app/*": ["app/*"],
+      "@lib/*": ["app/lib/*"],
+      "@style/*": ["app/styles/*"],
+      "@pages_scans/*": ["app/pages/scans/*"],
+      "@shared_library/*": ["../../shared-library/src/*"],
+      "@test/*": ["../test/*"],
+      "@test-e2e/*": ["../test-e2e/*"]
+    },
+    "forceConsistentCasingInFileNames":  true,
+    "noImplicitReturns" : true,
+    "noImplicitAny": false, // <-- TODO: Enable and fix
+    "noImplicitThis": true,
+    "strict": false, // <-- this enable alwaysStrict, strictNullChecks, etc TODO: Do this and fix ir
+    "alwaysStrict": true,
+    "strictNullChecks": false, // <-- this is actually good
+    "noUnusedLocals": false  //TODO: find angular compatible check
+  }
+
+
+}

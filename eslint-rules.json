@@ -1,0 +1,36 @@
+{
+    "parserOptions": {
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "env": {
+        "browser": true,
+        "es6": true,
+        "node": true,
+        "jasmine": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "plugins": [
+        "@typescript-eslint",
+        "unused-imports"
+    ],
+    // see: https://github.com/eslint/eslint/issues/8726 for list (or node ./node_modules/eslint/bin/eslint.js --print-config ./index.js )
+    //  "@typescript-eslint/max-len": ["error", { "code": 120 }],
+    "rules": {
+        "semi": [2, "always"],
+        "quotes": [2, "single", { "avoidEscape": true }],
+        "require-jsdoc" : 0,
+        "unused-imports/no-unused-imports-ts": 1,
+        "unused-imports/no-unused-vars-ts": 1,
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/no-use-before-define": ["error", {"functions": false, "variables":  true, "classes":  true}]
+    }
+}

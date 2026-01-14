@@ -1,0 +1,12 @@
+rules_version = '2';
+service firebase.storage {
+
+  // ------- SHOULD NOT BE PUBLIC ----------
+  
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      allow read : if false;
+    }
+  }
+}
+

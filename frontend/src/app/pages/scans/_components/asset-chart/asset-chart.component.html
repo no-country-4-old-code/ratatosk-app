@@ -1,0 +1,56 @@
+<app-coin-details-header-info
+        [coin$]="coin$"
+        [history$]="history$"
+        [attribute$]="metricSelected$"
+        [range$]="timeRangeSelected$">
+</app-coin-details-header-info>
+
+
+<div class="x-padding-element-left-right">
+    <ng-container *ngIf="chart$ | async; else loadingChart">
+        <div class="x-padding-element-left-right">
+            <app-coin-chart
+                    [chartData$]="chart$"
+                    [range$]="timeRangeSelected$">
+            </app-coin-chart>
+        </div>
+    </ng-container>
+
+    <ng-template #loadingChart>
+        <div class="chart-size-medium x-center-content">
+            <app-loading></app-loading>
+        </div>
+    </ng-template>
+
+</div>
+
+<div class="x-padding-element-top-bottom">
+    <app-selector-chip-horizontal
+            [options$]="functionsAvailable$"
+            [selected$]="functionsSelected$"
+            [attribute$]="metricSelected$"
+            (onSelection)="selectFunctions($event)">
+    </app-selector-chip-horizontal>
+
+    <mat-divider class="x-divider-category x-divider-margin"></mat-divider>
+
+    <app-selector-horizontal
+            [options$]="metricsAvailable$"
+            [selected$]="metricSelectedArray$"
+            (onSelection)="updateMetric($event[0])">
+    </app-selector-horizontal>
+
+    <mat-divider class="x-divider-category x-divider-margin"></mat-divider>
+
+    <app-selector-horizontal
+            [options$]="timeRangesAvailable$"
+            [selected$]="timeRangeSelectedArray$"
+            (onSelection)="updateTimeRange($event[0])">
+    </app-selector-horizontal>
+</div>
+
+<app-coin-details-sheet
+        [history$]="history$"
+        [originCoin$]="coin$">
+</app-coin-details-sheet>
+

@@ -1,0 +1,18 @@
+@import "src/styles/basic/size/vars";
+
+
+.height-of-100vh {
+  min-height: 100vh;  // for IOS to work
+}
+
+.list-header-shadow-element {
+  height: $list-header-height;
+  width: 100%;
+}
+
+.wrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}

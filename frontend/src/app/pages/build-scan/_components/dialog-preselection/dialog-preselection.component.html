@@ -1,0 +1,73 @@
+
+<div mat-dialog-title class="font-sub1">
+    <div class="x-flex-row">
+        <div class="x-flex-element-grow">{{data.title}}</div>
+        <div class="x-flex-element-right x-padding-element-left-right">({{(selected$ | async).length}}/{{idsOfAlloptions.length}})</div>
+    </div>
+    <div class="x-padding-element"></div>
+
+    <ng-template #normal>
+        <div class="x-flex-row font-body2">
+            <label class="x-flex-row">
+                <mat-checkbox [color]="'primary'" [checked]="areAllSelected$ | async" (change)="toggleAll($event)"></mat-checkbox>
+                <div class="x-padding-element"></div>
+                <div>Select All</div>
+            </label>
+            <div class="x-flex-element-grow"></div>
+            <div class="x-flex-element-right x-border-radius-min x-padding-element-left-right" matRipple (click)="showSearch(true)">
+                <mat-icon>{{icons.search}}</mat-icon>
+            </div>
+        </div>
+    </ng-template>
+
+    <div *ngIf="isSearchDialogActive else normal">
+        <div class="x-flex-row font-body2">
+            <div class="x-flex-element-grow">
+                <app-search (keyUpSearch)="onSearchTermUpdate($event)" ></app-search>
+            </div>
+            <div class="x-flex-element-right x-border-radius-min x-padding-element-left-right" matRipple (click)="showSearch(false)">
+                <mat-icon>arrow_back</mat-icon>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<ng-container *ngIf="optionsShown$ | async as elements">
+
+    <cdk-virtual-scroll-viewport style="height: 50vh"  itemSize="40">
+        <div *cdkVirtualFor="let el of elements; templateCacheSize: 0">
+            <div class="x-list-element-height-mini x-center-content-vertical x-border-radius-min"
+                 [ngClass]="{'color-foreground-disabled': !el.checked}"
+                 matRipple
+                 (click)="updateElement(el.id)">
+                <div class="x-flex-element-grow x-flex-row x-padding-element-top-bottom">
+                    <ng-container *ngIf="el.iconPath; else defaultImage">
+                        <div matBadge appMatBadgeExtension matBadgeSize="small" matBadgePosition="below after" icon="check"
+                             [isSelected]="el.checked">
+                                <img class="x-icon-small x-border-radius-max"
+                                     [ngClass]="{'x-disabled-image': !el.checked}"
+                                     [src]=el.iconPath>
+                        </div>
+                    </ng-container>
+
+                    <ng-template #defaultImage>
+                        <app-centered-badge [isEnabled]="el.checked"></app-centered-badge>
+                    </ng-template>
+
+                    <div class="x-padding-element"></div>
+                    <div class="x-flex-element-grow font-body2">{{el.title}}</div>
+                    <div class="x-flex-element-right x-padding-element-left-right font-caption">
+                        {{el.sidetext | uppercase}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </cdk-virtual-scroll-viewport>
+
+</ng-container>
+<div class="x-padding-element-top"></div>
+<div class="x-padding-element">
+    <button class="float-right x-padding-element-left" mat-button [mat-dialog-close]="selected$ | async" cdkFocusInitial>Ok</button>
+    <button class="float-right" mat-button [mat-dialog-close]="undefined">Cancel</button>
+</div>

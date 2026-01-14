@@ -1,0 +1,13 @@
+
+<ng-container *ngIf="selected$ | async as selected">
+        <mat-form-field>
+            <input matInput
+                   [formControl]="inputControl">
+            <mat-error *ngIf="inputControl.hasError('min')">
+                Should be greater or equal {{minMax.min}}
+            </mat-error>
+            <mat-error *ngIf="inputControl.hasError('max')">
+                Should be less or equal {{minMax.max}}
+            </mat-error>
+        </mat-form-field>
+</ng-container>

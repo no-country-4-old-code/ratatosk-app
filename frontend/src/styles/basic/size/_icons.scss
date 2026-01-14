@@ -1,0 +1,24 @@
+@import "../shape/border_radius";
+@import "vars";
+
+$icons: ('mini': $icon-size-mini,
+        'small': $icon-size-small,
+        'medium': $icon-size-medium,
+        'large': $icon-size-large,
+        'extra-large': $icon-size-extra-large);
+
+@each $name, $size in $icons {
+  .x-icon-#{$name} {
+    @extend .x-border-radius-min;
+    width: $size;
+    height: $size;
+  }
+}
+
+// special case because need to force size with !important
+.x-icon-mini {
+  @extend .x-border-radius-min;
+  width: $icon-size-mini !important;
+  height: $icon-size-mini !important;
+  font-size: 16px !important;
+}

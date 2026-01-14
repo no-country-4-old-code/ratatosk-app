@@ -1,0 +1,46 @@
+<div class="x-list-element-height-large x-padding-element-left-right-double color-background color-when-hover" matRipple
+     xmlns="http://www.w3.org/1999/html">
+
+  <ng-container *ngIf="assetData$ | async as asset">
+
+        <div class="x-grid-left-section-width x-flex-row-space-between">
+
+            <div class="rank font-caption x-overflow-text"
+                 [class.text_size_small]="asset.rank > borderTextMiddle"
+                 [class.text_size_smaller]="asset.rank > borderTextLong">
+              {{asset.rank}}
+            </div>
+
+            <div class="x-center-content-vertical x-padding-element-left-right">
+
+              <div matBadge appMatBadgeExtension matBadgeColor="accent" matBadgeSize="small" matBadgePosition="below after" [icon]="icons.add"
+                   [isSelected]="asset.isNewInScan">
+                <img class="x-icon-medium x-border-radius-max" [src]=asset.iconPath>
+              </div>
+
+            </div>
+        </div>
+
+        <div class="x-flex-element-grow">
+          <div class="title font-sub2">{{asset.name | slice: 0:16}}</div>
+          <div class="font-caption">
+            <span class="x-overflow-text">{{asset.price | currencyCoin: asset.currencySymbol}}</span>
+
+            <span class="x-overflow-text">
+              <app-colored-percent [value]="asset.delta" [isDisplayedBlock]="false"></app-colored-percent>
+            </span>
+          </div>
+        </div>
+
+    </ng-container>
+
+  <div class="chart-container">
+    <app-chart-sparkline
+            [samples$]="sparklineSamples$"
+            [color$]="sparklineColor$">
+    </app-chart-sparkline>
+  </div>
+
+</div>
+<mat-divider class="x-divider-margin"></mat-divider>
+

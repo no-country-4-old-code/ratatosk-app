@@ -1,0 +1,17 @@
+@use '~@angular/material' as mat;
+@import '../../../../node_modules/@angular/material/theming';
+@import "vars";
+
+.x-elevation-app-bar {
+  position: relative;
+  z-index: $elevation-medium;
+  position: sticky;
+  position: -webkit-sticky; /* macOS/iOS Safari */
+  @include mat.elevation(4);
+}
+
+.x-elevation-selected {
+  position: relative;
+  z-index: $elevation-low;
+  @include mat.elevation(2);
+}

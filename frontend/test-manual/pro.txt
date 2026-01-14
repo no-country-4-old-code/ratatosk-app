@@ -1,0 +1,17 @@
+** do in mobile and pc format
+
+- start as DemoUser
+
+- Navigation
+    - Page should open
+    - as Demo User -> link to login should work
+    - and back
+    
+- Content
+    - As Demo -> No button should be shown, only link to login
+    - As User -> Button for offer ---> click opens pay dialog
+    - As Pro  -> Button for cancel --> Modus changed --> click on "undone" cancel the cancel (back)
+    
+- Other transisitions:
+    - User paid pro --> should change to pro via wait dialog
+    - Pro is canceld and exceeded -> should change back to user dialog

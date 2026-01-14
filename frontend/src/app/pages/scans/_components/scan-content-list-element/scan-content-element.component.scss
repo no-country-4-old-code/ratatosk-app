@@ -1,0 +1,19 @@
+@import "../../../../../styles/basic/mixins/breakpoints";
+
+.title {
+  margin-bottom: 4px;
+}
+
+.text_size_small {
+  @include respond-to(small-screen) { font-size: 8px; }
+}
+
+.text_size_smaller {
+  @include respond-to(small-screen) { font-size: 6px; }
+}
+
+.chart-container {
+  @include respond-to(small-screen) { width: 100px; }
+  @include respond-to(handhelds) { width: 150px; }
+  @include respond-to(medium-screens) { width: 200px; }
+}

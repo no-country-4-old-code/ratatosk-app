@@ -1,0 +1,44 @@
+<div class="fixed-app-bar">
+  <div class="height-of-app-bar font-title-colored x-flex-row x-padding-element-left-right-double color-app-bar"
+       [ngClass]="{'x-elevation-app-bar': !disableElevation}">
+
+    <ng-container *ngIf="iconLeft!=empty">
+      <div class="x-grid-left-section-width x-border-radius-max x-center-content-vertical"
+           matRipple (click)="onClick(iconLeft)">
+        <mat-icon class="x-icon-small" [ngClass]="{'color-is-disabled': disableIcons[0]}">
+          {{iconLeft}}
+        </mat-icon>
+        <ng-container *ngIf="iconTitlePath!=empty">
+          <img class="x-icon-medium x-border-radius-min"
+               alt=""
+               [ngClass]="{'color-card': isIconTitleDisplayedOnCard}"
+               [src]=iconTitlePath>
+        </ng-container>
+        <div class="x-flex-element-grow"></div>
+      </div>
+    </ng-container>
+
+    <ng-content></ng-content>
+
+    <ng-container *ngIf="iconRightFirst!=empty || iconRightSecond!=empty">
+      <span class="spacer"></span>
+    </ng-container>
+
+    <ng-container *ngIf="iconRightFirst!=empty">
+      <mat-icon class="x-icon-small icon_right"
+                [ngClass]="{'color-is-disabled': disableIcons[1]}"
+                matRipple (click)="onClick(iconRightFirst)">
+        {{iconRightFirst}}
+      </mat-icon>
+    </ng-container>
+
+    <ng-container *ngIf="iconRightSecond!=empty">
+      <mat-icon class="x-icon-small"
+                [ngClass]="{'color-is-disabled': disableIcons[2]}"
+                matRipple (click)="onClick(iconRightSecond)">
+        {{iconRightSecond}}
+      </mat-icon>
+    </ng-container>
+  </div>
+</div>
+<div class="x-list-element"></div>

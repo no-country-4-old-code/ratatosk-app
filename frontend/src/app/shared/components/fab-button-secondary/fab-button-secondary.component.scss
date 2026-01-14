@@ -1,0 +1,20 @@
+@import "src/styles/basic/space/vars";
+@import "src/styles/basic/size/icons";
+
+$offset-caused-by-main-fab-button: 2 * $padding-element-double + $icon-size-medium + $padding-element;
+
+.fixed-secondary-fab {
+  position: fixed;
+  right: $padding-element;
+  z-index: 999;
+}
+
+.secondary-with-offset {
+  @extend .fixed-secondary-fab;
+  bottom: $offset-caused-by-main-fab-button;
+}
+
+.secondary-without-offset {
+  @extend .fixed-secondary-fab;
+  bottom: $padding-element;
+}

@@ -1,0 +1,5 @@
+@import "src/styles/basic/animation/mixin_fade_in";
+$delayFadeIn: 0s;
+$timeToFadeIn: 0.5s;
+
+.animate-fade-in { @include fadingInWithDelay($delayFadeIn, $timeToFadeIn); }

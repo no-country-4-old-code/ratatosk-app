@@ -1,0 +1,10 @@
+** do in mobile and pc format
+
+- Navigation
+    - Page should open /menu/about
+    - Page should open Nav. Menu
+- Links
+    - check every share button
+    - check follow button
+    - check every special thanks link
+    - + all other links ;)

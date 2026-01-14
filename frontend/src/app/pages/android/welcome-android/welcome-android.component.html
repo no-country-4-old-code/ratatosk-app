@@ -1,0 +1,28 @@
+
+<div class="flex-main x-margin-element">
+    <div class="x-padding-element-double"></div>
+    <!--
+    <img [src]="iconUrl" alt="Ratatosk logo">
+    -->
+    <h1 class="font-h3 color-primary">RATATOSK</h1>
+    <h2 class="font-h4">COMING SOON</h2>
+    <div>
+        <div class="x-padding-element-double"></div>
+        <ng-container *ngIf="counter$ | async as counter">
+            <div class="x-flex-row-space-between">
+                <ng-container *ngTemplateOutlet="count; context: {title: 'days', value: counter.days}"></ng-container>
+                <ng-container *ngTemplateOutlet="count; context: {title: 'hours', value: counter.hours}"></ng-container>
+                <ng-container *ngTemplateOutlet="count; context: {title: 'minutes', value: counter.minutes}"></ng-container>
+                <ng-container *ngTemplateOutlet="count; context: {title: 'seconds', value: counter.seconds}"></ng-container>
+            </div>
+        </ng-container>
+    </div>
+</div>
+
+
+<ng-template #count let-title="title" let-value="value">
+    <div class="x-padding-element x-margin-element" style="text-align: center">
+        <p class="font-sub1"><strong>{{value}}</strong></p>
+        <p class="font-caption-colored">{{title | uppercase}}</p>
+    </div>
+</ng-template>

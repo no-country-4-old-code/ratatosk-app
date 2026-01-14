@@ -1,0 +1,29 @@
+** do in mobile and pc format
+
+- start as DemoUser
+
+- Navigation
+    - Page should open
+    - Open Currency Dialog
+    - Abort Dialog (click backdrop)
+    - Open currency dialog
+    - select currency
+    - card should flip
+    - Click on Cancel x -> Nav should open
+    - Open Page
+    - Click on Commit -> Nav should open
+    
+- Change reset
+    - Make change to currency
+    - Click on cancel
+    - Open -> Change should be gone
+
+- Change save
+    - Make change to currency
+    - click on save
+    - Open -> Change should be still there
+    - Go to Coin View and check if correct unit is used
+    - Check converting factor
+
+
+

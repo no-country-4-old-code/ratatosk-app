@@ -1,0 +1,37 @@
+
+<app-bar-return [title]=pageTitle></app-bar-return>
+
+<div class="x-padding-element-left-right">
+    <mat-divider class="x-divider-section-left-free"></mat-divider>
+</div>
+
+<ng-container *ngFor="let item of docs" >
+    <div class="x-padding-element-left-right" matRipple>
+        <app-list-element-icon-and-text
+                [title]="item.title"
+                [subtext]="item.subtext"
+                [icon]="item.icon"
+                [callback]="item.callback"
+                [isIconImage]=false
+                [disableRipple]=true
+        >
+        </app-list-element-icon-and-text>
+    </div>
+</ng-container>
+
+<div class="x-padding-element-left-right">
+    <mat-divider class="x-divider-section-left-free"></mat-divider>
+</div>
+
+<div class="x-padding-element-left-right" matRipple>
+    <app-list-element-icon-and-text
+            [title]="faq.title"
+            [subtext]="faq.subtext"
+            [icon]="faq.icon"
+            [callback]="faq.callback"
+            [isIconImage]=false
+            [disableRipple]=true
+    >
+    </app-list-element-icon-and-text>
+</div>
+

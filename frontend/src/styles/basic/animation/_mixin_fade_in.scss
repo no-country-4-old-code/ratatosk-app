@@ -1,0 +1,27 @@
+@import "src/styles/basic/animation/mixin_keyframes";
+@import "src/styles/basic/animation/mixin_compatibility";
+
+
+// create keyframes for "fade in" for all plattforms
+@include keyframes-multi-platform('KeyframeFadeIn') {
+  0% {
+    @include for-multi-platform(display, none);
+    @include for-multi-platform(opacity, 0);
+  }
+  1% {
+    @include for-multi-platform(display, block);
+    @include for-multi-platform(opacity, 0);
+  }
+  100% {
+    @include for-multi-platform(display, block);
+    @include for-multi-platform(opacity, 1);
+  }
+}
+
+@mixin fadingInWithDelay($delay, $timeToFadeIn) {
+  display: block;
+  opacity: 0;
+  @include for-multi-platform(animation, KeyframeFadeIn $timeToFadeIn ease-out);
+  @include for-multi-platform(animation-fill-mode, forwards);
+  @include for-multi-platform(animation-delay, $delay);
+}

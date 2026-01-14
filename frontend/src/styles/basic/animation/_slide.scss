@@ -1,0 +1,30 @@
+@import "basic";
+@import "mixin_keyframes";
+@import "mixin_compatibility";
+@import "vars";
+
+$keyframes-animation-slide-in-right: 'animate-slide-in-right';
+$keyframes-animation-slide-in-left: 'animate-slide-in-left';
+$keyframes-animation-slide-out-right: 'animate-slide-out-right';
+$keyframes-animation-slide-out-left: 'animate-slide-out-left';
+
+@include keyframes-simple-transition($keyframes-animation-slide-in-right, $translate-to-rightX, $translate-to-normalX);
+@include keyframes-simple-transition($keyframes-animation-slide-in-left, $translate-to-leftX, $translate-to-normalX);
+@include keyframes-simple-transition($keyframes-animation-slide-out-right, $translate-to-normalX, $translate-to-rightX);
+@include keyframes-simple-transition($keyframes-animation-slide-out-left, $translate-to-normalX, $translate-to-leftX);
+
+.x-animate-slide-in-right {
+  @include for-multi-platform(animation, $keyframes-animation-slide-in-right $duration-slide $timing-function-slide both);
+}
+
+.x-animate-slide-in-left {
+  @include for-multi-platform(animation, $keyframes-animation-slide-in-left $duration-slide $timing-function-slide both);
+}
+
+.x-animate-slide-out-right {
+  @include for-multi-platform(animation, $keyframes-animation-slide-out-right $duration-slide $timing-function-slide both);
+}
+
+.x-animate-slide-out-left {
+  @include for-multi-platform(animation, $keyframes-animation-slide-out-left $duration-slide $timing-function-slide both);
+}

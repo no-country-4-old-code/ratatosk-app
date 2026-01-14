@@ -1,0 +1,22 @@
+$width-left-element: 100px;
+$width-right-element: 24px;
+
+
+.width-left-element {
+  width: $width-left-element;
+  min-width: $width-left-element;
+}
+
+.width-right-element {
+  min-width: $width-right-element;
+}
+
+.info-card-container {
+  position: relative;
+  min-height: 170px;
+  overflow:hidden;
+}
+
+mat-form-field {
+  width: 100%;
+}

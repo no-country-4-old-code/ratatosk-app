@@ -1,0 +1,101 @@
+
+<ng-container *ngIf="content$ | async as response; else loading">
+
+    <div class="x-padding-element-double">
+        <div class="x-padding-element-left-right">
+
+            <div class="x-padding-element x-border-radius-min color-card">
+                <div class="font-sub2">General</div>
+                <div class="x-padding-element-top"></div>
+                <div class="x-flex-row-space-between-wrap">
+                    <ng-container *ngTemplateOutlet="record;context: {title: 'genisis date', data: response.genesis_date}"></ng-container>
+                    <ng-container *ngTemplateOutlet="records;context: {title: 'categories', data: staticCoinInfo.categories}"></ng-container>
+                    <ng-container *ngTemplateOutlet="record;context: {title: 'block time in minutes', data: response.block_time_in_minutes}"></ng-container>
+                    <ng-container *ngTemplateOutlet="record;context: {title: 'hashing algorithmus', data: response.hashing_algorithm}"></ng-container>
+                    <ng-container *ngTemplateOutlet="records;context: {title: 'exchanges', data: exchanges}"></ng-container>
+                </div>
+            </div>
+
+            <div class="x-padding-element"></div>
+
+            <div class="x-padding-element x-border-radius-min color-card">
+                <div class="font-sub2">Links</div>
+                <div class="x-padding-element-top"></div>
+                <div class="x-flex-row-space-between-wrap">
+                    <ng-container *ngTemplateOutlet="recordLinks;context: {title: 'homepages', data: response.links.homepage}"></ng-container>
+                    <ng-container *ngTemplateOutlet="recordLinks;context: {title: 'repositories', data: response.repositories}"></ng-container>
+                    <ng-container *ngTemplateOutlet="recordLink;context: {title: 'twitter', data: response.twitterUrl}"></ng-container>
+                    <ng-container *ngTemplateOutlet="recordLink;context: {title: 'subreddit', data: response.links.subreddit_url}"></ng-container>
+                </div>
+            </div>
+
+            <div class="x-padding-element"></div>
+
+            <div class="x-padding-element x-border-radius-min color-card">
+                <div class="font-sub2">Description</div>
+                <div class="x-padding-element"></div>
+                <div class="font-body2">
+                    <ng-container *ngIf="response.description.en !== ''; else default">
+                        <div [innerHTML]="response.description.en"></div>
+                    </ng-container>
+                </div>
+                <div class="x-padding-element-top"></div>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+<ng-template #record let-title="title" let-data="data">
+    <div class="min-width-150px x-padding-element-right x-padding-element-top-bottom">
+        <div class="x-padding-element-bottom-grid-step font-caption-colored">{{title}}</div>
+        <ng-container *ngIf="data !== null; else default">
+            <div class="font-body2">{{data}}</div>
+        </ng-container>
+    </div>
+</ng-template>
+
+<ng-template #recordLink let-title="title" let-data="data">
+    <div class="min-width-150px x-padding-element-right x-padding-element-top-bottom">
+        <div class="x-padding-element-bottom-grid-step font-caption-colored">{{title}}</div>
+        <ng-container *ngIf="data !== null; else default">
+            <div class="x-overflow-text font-body2">
+                <a [href]=data class="x-link-color">{{data}}</a>
+            </div>
+        </ng-container>
+    </div>
+</ng-template>
+
+
+<ng-template #records let-title="title" let-data="data">
+    <div class="min-width-150px x-overflow-text x-padding-element-right x-padding-element-top-bottom">
+        <div class="x-padding-element-bottom-grid-step font-caption-colored">{{title}}</div>
+        <ng-container *ngIf="data.length > 0; else default">
+            <ng-container *ngFor="let record of data">
+                <div class="x-overflow-text font-body2">
+                    <div class="font-body2">{{record}}</div>
+                </div>
+            </ng-container>
+        </ng-container>
+    </div>
+</ng-template>
+
+<ng-template #recordLinks let-title="title" let-data="data">
+    <div class="min-width-150px x-overflow-text x-padding-element-right x-padding-element-top-bottom">
+        <div class="x-padding-element-bottom-grid-step font-caption-colored">{{title}}</div>
+        <ng-container *ngIf="data.length > 0; else default">
+            <ng-container *ngFor="let link of data">
+                <div class="x-overflow-text font-body2">
+                    <a [href]=link class="x-link-color">{{link}}</a>
+                </div>
+            </ng-container>
+        </ng-container>
+    </div>
+</ng-template>
+
+<ng-template #loading>
+    <app-loading></app-loading>
+</ng-template>
+
+<ng-template #default>
+    <div class="font-body2">--</div>
+</ng-template>

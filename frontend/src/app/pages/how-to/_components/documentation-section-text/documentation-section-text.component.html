@@ -1,0 +1,16 @@
+
+<div class="x-padding-element"></div>
+<div>
+    <ng-container *ngIf="doc.header && doc.header.length > 0">
+        <div class="font-caption-colored" [innerHTML]="doc.header"></div>
+    </ng-container>
+
+    <ng-container *ngIf="doc.content && doc.content.length > 0 && doc.header && doc.header.length > 0">
+        <div class="x-padding-element-bottom "></div>
+    </ng-container>
+
+    <ng-container *ngIf="doc.content && doc.content.length > 0">
+        <div class="x-line-wrap-text font-body2" [innerHTML]="doc.content"></div>
+    </ng-container>
+</div>
+<div class="x-padding-element"></div>

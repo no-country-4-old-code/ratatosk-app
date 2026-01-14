@@ -1,0 +1,47 @@
+{
+  "name": "shared_backend_library",
+  "description": "Shared functionality for backend - no dependencies to other internal projects except shared library",
+  "private": true,
+  "main": "./dist/index.js",
+  "scripts": {
+    "all": "npm run lint && npm run build-check && npm run test",
+    "test": "jasmine-ts --config=./test/jasmine.json",
+    "build-check": "npm run rm-dist && tsc --diagnostics && npm run rm-dist",
+    "lint": "eslint --fix \"src/**/*.ts\" \"test/**/*.ts\" && eslint \"src/**/*.ts\" \"test/**/*.ts\"",
+    "build": "npm run lint && npm run build-only && npm run test",
+    "build-only": "npm run rm-dist && tsc --diagnostics ",
+    "serve": "npm run build && firebase serve --only functions",
+    "rm-dist": "rm -r -f ./dist",
+    "set-project-to-internal": "npm run func-set-project internal",
+    "set-project-to-public": "npm run func-set-project public",
+    "func-set-project": "func() { cd ../..; ./setFirebaseProject.sh \"$1\"; }; func"
+  },
+  "dependencies": {
+    "@google-cloud/firestore": "^4.11.1",
+    "@google-cloud/pubsub": "^2.12.0",
+    "@google-cloud/storage": "^5.8.5",
+    "@types/mathjs": "6.0.12",
+    "coingecko-api": "1.0.10",
+    "firebase": "8.6.1",
+    "firebase-admin": "^9.8.0",
+    "firebase-functions": "^3.14.1",
+    "mathjs": "9.4.0",
+    "node-fetch": "^2.6.1",
+    "ts-retry-promise": "0.6.0"
+  },
+  "devDependencies": {
+    "@types/jasmine": "3.7.4",
+    "@typescript-eslint/eslint-plugin": "2.34.0",
+    "@typescript-eslint/parser": "2.34.0",
+    "eslint": "6.8.0",
+    "eslint-config-google": "0.14.0",
+    "eslint-plugin-unused-imports": "1.1.1",
+    "jasmine": "3.7.0",
+    "jasmine-ts": "0.3.3",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.9"
+  },
+  "engines": {
+    "node": "12"
+  }
+}

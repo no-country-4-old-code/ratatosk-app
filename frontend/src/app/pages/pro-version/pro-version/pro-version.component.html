@@ -1,0 +1,117 @@
+<app-bar-return [title]=pageTitle></app-bar-return>
+
+
+<ng-template #Pro>
+    <app-list-element-icon
+            [icon]="userBannerIconPath"
+            [isIconImage]=true
+            [disableRipple]=true>
+        <div class="x-flex-row font-title">
+            <div class="x-padding-element-right font-title-colored">You are a</div>
+            <div class="x-padding-element x-border-radius-min color-is-active-outlined">Pro</div>
+        </div>
+    </app-list-element-icon>
+    <p class="x-padding-element-left-right-double font-body2">Your pro status ends at {{expiredInfo$ | async}}</p>
+</ng-template>
+
+<ng-template #NoPro>
+    <app-list-element-icon
+            [icon]="userBannerIconPath"
+            [isIconImage]=true
+            [disableRipple]=true>
+        <div class="x-flex-row font-title">
+            <div class="x-padding-element-right font-title-colored">Become a</div>
+            <div class="x-padding-element x-border-radius-min color-is-active-outlined">Pro</div>
+        </div>
+    </app-list-element-icon>
+</ng-template>
+
+
+<div class="x-padding-element-left-right">
+
+    <ng-container *ngIf="userRole.role$ | async as role">
+        <ng-container *ngIf="role === rolePro; then Pro else NoPro"></ng-container>
+    </ng-container>
+
+    <div class="x-padding-element-left-right">
+        <mat-divider class="x-divider-section-left-free"></mat-divider>
+    </div>
+    <p class="x-padding-element-left-right-double font-body2">We reward your feedback with these benefits</p>
+</div>
+
+
+<div class="x-padding-element x-max-screen-width font-caption">
+    <ng-container *ngFor="let benefit of benefits">
+        <div class="x-list-element-height-small">
+            <app-list-element-icon
+                    [icon]="iconCheck"
+                    iconColor="primary"
+                    [disableRipple]="true"
+            >
+                <div [innerHTML]=benefit></div>
+            </app-list-element-icon>
+        </div>
+    </ng-container>
+</div>
+
+
+<ng-template #FeedbackGiven>
+    <div class="x-padding-element-left-right">
+        <div class="x-padding-element-left-right-double font-body2">
+            <p>Thank you for your feedback.</p>
+            <p>We will announce upcoming "calls for feedback" / events / features on twitter.</p>
+        </div>
+        <ng-container *ngTemplateOutlet="twitter"></ng-container>
+    </div>
+    <div class="x-padding-element-double"></div>
+</ng-template>
+
+
+<ng-template #NoFeedbackGiven>
+    <ng-container *ngIf="isFeedbackEnabled; then FeedbackEnabled else FeedbackDisabled"></ng-container>
+</ng-template>
+
+<ng-template #FeedbackEnabled>
+    <div class="x-padding-element-left-right">
+        <div class="x-padding-element-left-right-double font-body2">
+            <p>This is a limited time offer.</p>
+            <p>We close it as soon as we have enough feedback.</p>
+            <p>Your benefits will end after <b>{{durationOfProVersionInWeeks}} weeks</b> by itself.</p>
+        </div>
+        <div class="x-padding-element-double">
+            <div class="x-padding-element-double x-border-radius-min color-accent font-button"
+                 style="max-width: 300px; text-align: center"
+                 (click)="giveFeedback()" matRipple>Feedback !</div>
+        </div>
+    </div>
+    <div class="x-padding-element-double"></div>
+
+    <div class="x-padding-element-double"></div>
+    <app-fab-button [icon]="iconPro" (clickedAndEnabled)="giveFeedback()"></app-fab-button>
+</ng-template>
+
+<ng-template #FeedbackDisabled>
+    <div class="x-padding-element-left-right">
+        <div class="x-padding-element-left-right-double font-body2">
+            <p>Sorry, but the current feedback round has already ended !</p>
+            <p>We will announce upcoming "calls for feedback" / events / features on twitter.</p>
+        </div>
+        <ng-container *ngTemplateOutlet="twitter"></ng-container>
+    </div>
+    <div class="x-padding-element-double"></div>
+</ng-template>
+
+<ng-container *ngIf="hasUserGivenFeedback$ | async; then FeedbackGiven else NoFeedbackGiven"></ng-container>
+
+
+
+<ng-template #twitter>
+    <app-list-element-icon-and-text
+            [title]="twitterButton.title"
+            [titleClass]="'font-body2'"
+            [icon]="twitterButton.icon"
+            [callback]="twitterButton.callback"
+            [isIconImage]=true>
+    </app-list-element-icon-and-text>
+</ng-template>
+

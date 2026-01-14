@@ -1,0 +1,8 @@
+@import "vars";
+@import "../mixins/breakpoints";
+
+.x-grid-left-section-width {
+  @include respond-to(small-screen) {width: $grid-left-section-width-small; min-width: $grid-left-section-width-small;}
+  @include respond-to(handhelds) {width: $grid-left-section-width-medium; min-width: $grid-left-section-width-medium;}
+}
+

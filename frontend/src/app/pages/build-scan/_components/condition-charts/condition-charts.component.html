@@ -1,0 +1,37 @@
+
+<ng-container *ngIf="{id: coinId$ | async} as idObj">
+    <div class="x-list-element-height-mini x-flex-row x-padding-element-left-right font-body2">
+        <div class="x-flex-row x-padding-element x-flex-element-grow" (click)="openDialogSelectCoin()" matRipple>
+            <img class="padding-correction-icon x-icon-small" [src]=lookupCoin[idObj.id].iconPath>
+            <div class="padding-correction x-flex-element-grow x-padding-element-left-right x-overflow-text">
+                {{lookupCoin[idObj.id].name}}
+            </div>
+        </div>
+        <div class="x-padding-element"></div>
+        <div class="x-padding-element"
+             (click)="openDialogSelectTimeRange()" matRipple>
+            {{range$ | async}}
+        </div>
+    </div>
+</ng-container>
+
+<div class="x-padding-element-left-right">
+    <div class="x-padding-element-left-right">
+
+        <ng-container *ngIf="chart$ | async; else loadingChart">
+            <app-coin-chart [chartData$]="chart$"
+                            [range$]="range$"
+                            size="small">
+            </app-coin-chart>
+        </ng-container>
+
+        <ng-template #loadingChart>
+            <div class="chart-size-medium x-center-content">
+                <app-loading></app-loading>
+            </div>
+        </ng-template>
+
+        <app-chart-boolean [samples$]="chartBool$"></app-chart-boolean>
+        <div class="x-padding-element-top"></div>
+    </div>
+</div>

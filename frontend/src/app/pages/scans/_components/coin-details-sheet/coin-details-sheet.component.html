@@ -1,0 +1,106 @@
+
+<mat-divider></mat-divider>
+<ng-container *ngIf="sheet$ | async as sheet">
+
+    <div class="x-padding-element-left-right x-border-radius-min">
+
+      <ng-container *ngIf="coinInfo$ | async as info">
+        <div class="x-flex-row x-padding-element x-list-element-height-mini x-overflow-text">
+          <img class="x-icon-small x-border-radius-max" [src]=info.iconPath>
+          <div class="x-padding-element font-sub1">
+            {{info.name}} {{info.symbol | uppercase}}
+          </div>
+        </div>
+      </ng-container>
+
+      <div class="x-scrolling-horizontal-wrapper font-body2 ">
+
+          <div class="card-height x-scrolling-horizontal-element x-padding-element x-overflow-text">
+            <div class="x-center-content-vertical x-div-list-title">
+              <mat-icon class="x-icon-mini">{{icons.price}}</mat-icon>
+              <div class="font-sub2 title">Price</div>
+            </div>
+              <div class="x-flex-row-space-between">
+                <div class="x-div-list">
+                  <div>{{sheet.currency | uppercase}}</div>
+                  <div>{{sheet.currencyBitcoin | uppercase}}</div>
+                </div>
+                <div class="x-padding-element"></div>
+                <div class="x-div-list text-align-right">
+                  <div>{{sheet.price | currencyCoin: sheet.currencySymbol}}</div>
+                  <div>{{sheet.priceInBtc | currencyCoinShorted: sheet.currencySymbolBitcoin}}</div>
+                </div>
+              </div>
+          </div>
+
+          <div class="x-padding-element-double"></div>
+
+          <div class="card-height x-scrolling-horizontal-element x-padding-element x-overflow-text">
+            <div class="x-center-content-vertical x-div-list-title">
+              <mat-icon class="x-icon-mini">{{icons.supply}}</mat-icon>
+              <div class="font-sub2 title">Supply</div>
+            </div>
+            <div class="x-flex-row-space-between">
+              <div class="x-div-list">
+                <div>Circ.</div>
+                <div>Max.</div>
+                <div>Dist.</div>
+              </div>
+              <div class="x-padding-element"></div>
+              <div class="x-div-list text-align-right">
+                <div>{{sheet.supply | currencyCoinShorted: ''}}</div>
+                <div>{{sheet.maxSupply | currencyCoinShorted: ''}}</div>
+                <div>{{sheet.supplyDistribution}}</div>
+              </div>
+            </div>
+          </div>
+
+        <div class="x-padding-element-double"></div>
+
+          <div class="card-height x-scrolling-horizontal-element x-padding-element x-overflow-text">
+            <div class="x-center-content-vertical x-div-list-title">
+              <mat-icon class="x-icon-mini">{{icons.change}}</mat-icon>
+              <div class="font-sub2 title">Change</div>
+            </div>
+            <div class="x-flex-row-space-between">
+              <div class="x-div-list">
+                <div>1H</div>
+                <div>1D</div>
+                <div>7D</div>
+              </div>
+              <div class="x-padding-element"></div>
+                <div class="x-div-list text-align-right">
+                  <app-colored-percent [value]="sheet.priceChange1H"></app-colored-percent>
+                  <app-colored-percent [value]="sheet.priceChange1D"></app-colored-percent>
+                  <app-colored-percent [value]="sheet.priceChange7D"></app-colored-percent>
+                </div>
+            </div>
+          </div>
+
+        <div class="x-padding-element-double"></div>
+
+          <div class="card-height x-scrolling-horizontal-element x-padding-element x-overflow-text">
+            <div class="x-center-content-vertical x-div-list-title">
+              <mat-icon class="x-icon-mini">{{icons.market}}</mat-icon>
+              <div class="font-sub2 title">Market</div>
+            </div>
+            <div class="x-flex-row-space-between">
+              <div class="x-div-list">
+                <div>Rank</div>
+                <div>Cap</div>
+                <div>24H Vol</div>
+              </div>
+              <div class="x-padding-element"></div>
+              <div class="x-div-list text-align-right">
+                <div>{{sheet.rank}}</div>
+                <div>{{sheet.marketCap | currencyCoinShorted: sheet.currencySymbol}}</div>
+                <div>{{sheet.volume | currencyCoinShorted: sheet.currencySymbol}}</div>
+              </div>
+            </div>
+          </div>
+
+      </div>
+
+      <div class="x-padding-element"></div>
+  </div>
+</ng-container>

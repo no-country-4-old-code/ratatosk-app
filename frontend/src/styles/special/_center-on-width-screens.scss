@@ -1,0 +1,23 @@
+@import "../basic/mixins/breakpoints";
+@import "../basic/mixins/vars";
+
+$max-width: $break-medium;
+
+.x-center-on-width-screens {
+  @include respond-to(large-screens) {
+    // not possible to do @extend .x-center-content; within media queries
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    // end center
+    width: $max-width;
+  }
+  @include respond-to(full-hd-screens) {
+    // not possible to do @extend .x-center-content; within media queries
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    // end center
+    width: $max-width;
+  }
+}

@@ -1,0 +1,55 @@
+
+<ng-container *ngIf="id$ | async as id">
+  <ng-container *ngIf="asset$ | async as asset">
+
+    <app-bar-normal
+            [iconLeft]="icons.back"
+            [iconTitlePath]="asset.info.iconPath"
+            [title]="asset.info.name"
+            (clickOnGivenElement)="onClickAtAppBar($event)"
+            disableElevation="true">
+    </app-bar-normal>
+
+    <div class="mat-tab-shadow-element"></div>
+
+    <mat-tab-group color="primary" [selectedIndex]="tabIndexSubject | async">
+
+      <mat-tab>
+
+        <ng-template mat-tab-label>
+          <div style="width: 92px" (click)="tabIndexSubject.next(0)">
+            Chart
+          </div>
+        </ng-template>
+
+        <ng-template matTabContent>
+          <!-- matTabContent enables lazy loading -->
+          <div class="overwrite-touch" (swipe)="swipeTabs($event)">
+            <app-asset-chart [id]="id" [coin$]="asset$"></app-asset-chart>
+          </div>
+        </ng-template>
+
+      </mat-tab>
+
+
+      <mat-tab>
+
+        <ng-template mat-tab-label>
+          <div style="width: 92px" (click)="tabIndexSubject.next(1)">
+            About
+          </div>
+        </ng-template>
+
+        <ng-template matTabContent>
+          <!-- matTabContent enables lazy loading -->
+          <div class="overwrite-touch" (swipe)="swipeTabs($event)">
+            <app-asset-about [id]="id"></app-asset-about>
+          </div>
+        </ng-template>
+
+      </mat-tab>
+
+    </mat-tab-group>
+
+  </ng-container>
+</ng-container>

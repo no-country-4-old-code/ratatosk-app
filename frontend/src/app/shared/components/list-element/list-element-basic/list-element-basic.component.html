@@ -1,0 +1,9 @@
+<div class="x-padding-element-left-right"
+     [class.x-list-element-height-large]="isHeightRestricted"
+     matRipple
+     [matRippleDisabled]="disableRipple"
+     (click)="callback()">
+    <div class="x-center-content-vertical">
+        <ng-content></ng-content>
+    </div>
+</div>

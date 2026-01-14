@@ -1,0 +1,20 @@
+
+<ng-container *ngIf="info$ | async as info">
+    <div class=" border-style x-flex-row x-padding-element x-list-element-height-large x-border-radius-min color-card font-body2"
+        [ngStyle]="{'border-color': 'var(' + info.color + ')'}">
+
+        <div class="text-sideways"
+             [ngStyle]="{'color': 'var(' + info.color + ')'}">
+            {{info.metric}}
+        </div>
+
+        <div class="flex_box x-overflow-text x-flex-element-grow x-padding-element-left-right-double">
+                <div class="x-overflow-text x-padding-element-right" [innerHTML]="info.left | makeFirstLetterBig"></div>
+                <div class="x-padding-element-right" [innerHTML]=info.compare></div>
+                <div class="x-overflow-text" [innerHTML]=info.right></div>
+        </div>
+
+    </div>
+</ng-container>
+
+

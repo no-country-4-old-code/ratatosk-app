@@ -1,0 +1,184 @@
+@import "src/styles/basic/animation/mixin_keyframes";
+@import "src/styles/basic/animation/mixin_compatibility";
+@import "src/styles/basic/animation/mixin_fade_in";
+@import "src/styles/basic/mixins/breakpoints";
+
+$background-basic : #101d24 ;
+$background-light : rgba(245, 57, 15, 0.6); // rgba(217, 82, 51, 0.38)
+$background-transparency: rgba(255,0,0,0);
+$background-app-bar-buttons : rgba(68, 27, 18, 0.38);
+
+.flex-space-around-wrapped{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: center;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.background-landing {
+  background: $background-basic; // fallback solution
+  background: linear-gradient(to left top, $background-basic 25%, $background-light 95%);
+}
+
+.background-app-bar-button {
+  padding: 8px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  border-radius: 50px;
+  background: $background-app-bar-buttons;
+}
+
+.section-width {
+  @include respond-to(small-screen) {min-width: 100%;}
+  @include respond-to(handhelds) {min-width: 90%;}
+  @include respond-to(medium-screens) {min-width: 75%;}
+  @include respond-to(large-screens) {min-width: 40%;}
+
+}
+
+.iframe-container {
+  @extend .section-width;
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+}
+
+.iframe-container iframe{
+  position: absolute;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+// --- Animation vars
+
+$timeToFadeIn: 0.5s;
+$timeToDyeMarket: 0.75s;
+$timeToDrop: 0.5s;
+$timeToFadeInRotating: 0.5s;
+$timeToRise: 0.5s;
+
+$delayFadeIn1: 0s;
+$delayFadeIn2: 0.5s;
+$delayFadeInMarket: 1.0s;
+
+$delayStartDyeMarket: $delayFadeInMarket + $timeToFadeIn;
+$delayEndDyeMarket: $delayStartDyeMarket + $timeToFadeIn;
+$delayStartFallingTry: $delayEndDyeMarket + 0.5s;
+$delayEndFallingTry: $delayStartFallingTry + $timeToDrop;
+
+$delayFadeInFeature1: $delayEndFallingTry;
+$delayFadeInFeature2: $delayFadeInFeature1 + $timeToFadeIn;
+$delayFadeInFeature3: $delayFadeInFeature2 + $timeToFadeIn;
+$delayFadeInRegisterButton: $delayFadeInFeature3 + $timeToFadeIn;
+$delayRisingFadeInHowTo: $delayFadeInRegisterButton + $timeToFadeInRotating;
+$delayFadeInHowToVideo: $delayRisingFadeInHowTo + $timeToFadeIn;
+
+
+// --- Animation primary colored background ---
+
+// create keyframes for "primary background" for all plattforms
+@include keyframes-multi-platform('KeyframeDyeMarket') {
+  0% {
+    background-position: right;
+  }
+  100% {
+    background-position: left;
+  }
+}
+
+.animate-dye-market {
+  background: var(--color-primary); // fallback solution
+  background: linear-gradient(to left, $background-transparency 51%, var(--color-primary) 49%) right;
+  background-size: 200%;
+  @include for-multi-platform(animation, KeyframeDyeMarket $timeToDyeMarket ease-out);
+  @include for-multi-platform(animation-fill-mode, forwards);
+  @include for-multi-platform(animation-delay, $delayStartDyeMarket);
+}
+
+// --- Animation drop
+
+$distanceHeadline2Source: 80px;
+
+@include keyframes-multi-platform('KeyframeDrop') {
+  0% {
+    @include for-multi-platform(transform, translateY(-$distanceHeadline2Source) rotate3d(1, 0, 0, -180deg));
+    @include for-multi-platform(opacity, 0);
+  }
+  100% {
+    @include for-multi-platform(transform, translateY(0) rotate3d(1, 0, 0, 0deg));
+    @include for-multi-platform(opacity, 100);
+  }
+}
+
+.animate-drop {
+  @include for-multi-platform(opacity, 0);
+  @include for-multi-platform(animation, KeyframeDrop $timeToDrop ease-out $delayEndDyeMarket);
+  @include for-multi-platform(animation-fill-mode, forwards);
+}
+
+// --- Animation rotating fade in
+
+@include keyframes-multi-platform('KeyframeRotatedFadeIn') {
+  0% {
+    @include for-multi-platform(transform, rotate3d(1, 0, 0, 90deg));
+    @include for-multi-platform(opacity, 1);
+  }
+  100% {
+    @include for-multi-platform(transform, rotate3d(1, 0, 0, 0deg));
+    @include for-multi-platform(opacity, 1);
+  }
+}
+
+.animate-fade-in-register-button {
+  @include for-multi-platform(opacity, 0);
+  @include for-multi-platform(animation, KeyframeRotatedFadeIn $timeToFadeInRotating ease-out $delayFadeInRegisterButton);
+  @include for-multi-platform(animation-fill-mode, forwards);
+}
+
+// --- Animation rise
+
+$distanceOfRising: 100px;
+
+@include keyframes-multi-platform('KeyframeRise') {
+  0% {
+    @include for-multi-platform(transform, translateY($distanceOfRising));
+    @include for-multi-platform(opacity, 0);
+  }
+  100% {
+    @include for-multi-platform(transform, translateY(0));
+    @include for-multi-platform(opacity, 100);
+  }
+}
+
+.animate-rise {
+  @include for-multi-platform(opacity, 0);
+  @include for-multi-platform(animation, KeyframeRise $timeToRise ease-out $delayRisingFadeInHowTo);
+  @include for-multi-platform(animation-fill-mode, forwards);
+}
+
+
+// --- Animation fade in ---
+
+.animate-fade-in-1 { @include fadingInWithDelay($delayFadeIn1, $timeToFadeIn); }
+.animate-fade-in-2 { @include fadingInWithDelay($delayFadeIn2, $timeToFadeIn); }
+.animate-fade-in-market { @include fadingInWithDelay($delayFadeInMarket, $timeToFadeIn); }
+.animate-fade-in-feature1 { @include fadingInWithDelay($delayFadeInFeature1, $timeToFadeIn); }
+.animate-fade-in-feature2 { @include fadingInWithDelay($delayFadeInFeature2, $timeToFadeIn); }
+.animate-fade-in-feature3 { @include fadingInWithDelay($delayFadeInFeature3, $timeToFadeIn); }
+.animate-fade-in-howto-video{ @include fadingInWithDelay($delayFadeInHowToVideo, $timeToFadeIn); }

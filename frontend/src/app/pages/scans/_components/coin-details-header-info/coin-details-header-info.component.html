@@ -1,0 +1,17 @@
+
+<div class="x-list-element">
+
+  <div class="x-overflow-text font-h5">
+    {{(newValue$ | async) | currencyCoin: (unitSymbol$ | async)}}
+  </div>
+
+  <div class="x-flex-element-grow"></div>
+
+  <div class="x-flex-element-right">
+    <app-colored-percent  class="font-title-colored" [value]="delta$ | async"></app-colored-percent>
+    <div class="font-body">
+      {{(info$ | async) | makeFirstLetterBig}}
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,12 @@
+<app-bar-return [title]=pageTitle></app-bar-return>
+<ng-container *ngFor="let item of items" >
+    <div class="x-padding-element-left-right" matRipple>
+        <app-list-element-icon-and-text
+                [title]="item.title"
+                [icon]="item.icon"
+                [callback]="item.callback"
+                [isIconImage]=false
+                [disableRipple]=true>
+        </app-list-element-icon-and-text>
+    </div>
+</ng-container>

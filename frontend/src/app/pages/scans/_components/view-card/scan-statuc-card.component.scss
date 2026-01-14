@@ -1,0 +1,31 @@
+$icon_size: 70px;
+$icon_margin: 8px;
+$title_height: 16px;
+$subtext_height: 12px;
+$subtext_margin_vert: 4px;
+$container_width: $icon_size + 2 * $icon_margin;
+$container_height: $container_width + $title_height + $subtext_height  + 2 * $subtext_margin_vert ;
+$container_margin_vert: 8px;
+
+.icon {
+  margin: $icon_margin;
+}
+
+.title {
+  text-align: center;
+  max-height: $title_height;
+}
+
+.subtext {
+  text-align: center;
+  margin: $subtext_margin_vert 0;
+  max-height: $subtext_height;
+}
+
+.container {
+  width: $container_width;
+  height: $container_height;
+  margin: $container_margin_vert 0;
+}
+
+

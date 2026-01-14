@@ -1,0 +1,14 @@
+@import "src/styles/basic/grid/vars";
+
+$width-left-element: $grid-step * 48;
+$min-width-card: $grid-step * 4;
+
+.width-left-element {
+  width: $width-left-element;
+  min-width: $width-left-element;
+}
+
+.center-text-and-min-width {
+  min-width: $min-width-card;
+  text-align: center;
+}

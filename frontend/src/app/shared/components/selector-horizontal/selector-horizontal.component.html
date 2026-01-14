@@ -1,0 +1,9 @@
+<div *ngIf="selected$ | async as selected" class="padding-correction x-list-element x-scrolling-horizontal-wrapper">
+  <div *ngFor="let option of validOptions$ | async"
+       matRipple
+       class="x-border-radius-min element x-scrolling-horizontal-element font-button"
+       [class.color-is-active-outlined]="selected.includes(option)"
+       (click)="onClick(option)">
+      {{option}}
+  </div>
+</div>

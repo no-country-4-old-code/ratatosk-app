@@ -1,0 +1,50 @@
+import {LookupFirebaseCallFuncUrl, LookupFirebaseConfig} from '../datatypes/firebase-projects';
+
+const locationOfServer = 'us-central1';
+
+// has to be adapted (or added) in firestore rules
+export const demoUID = 'u7QidX0aLrcd0DJJttyzsxFjpDo1';
+
+export const isPublicRelease = false;
+
+// !!! For bitbucket pipeline manuall edit (where to deploy --> project name)
+export const firebaseConfigurations: LookupFirebaseConfig = {
+    'SCHEDULE': {
+        apiKey: "AIzaSyAC_bBGW6mQxK90GlTKD-MPx13N6T4hN8E",
+        authDomain: "schedule-ratatosk-dev.firebaseapp.com",
+        projectId: "schedule-ratatosk-dev",
+        storageBucket: "schedule-ratatosk-dev.appspot.com",
+        messagingSenderId: "410930741471",
+        appId: "1:410930741471:web:a3a3bd9c4bd9e89721696a"
+    },
+    'WEBPAGE': {
+        apiKey: "AIzaSyBQRgWhpHVTg_N--HK2ktGDK7LcvnUMLT0",
+        authDomain: "ratatosk-webpage-dev.firebaseapp.com",
+        projectId: "ratatosk-webpage-dev",
+        storageBucket: "ratatosk-webpage-dev.appspot.com",
+        messagingSenderId: "135291290502",
+        appId: "1:135291290502:web:754dbe77966d99060de207"
+    },
+    'USER_001': {
+        apiKey: "AIzaSyCC7Z_lIBasJE2g63shBuWxzS4tjn_Svog",
+        authDomain: "user-001-ratatosk-dev.firebaseapp.com",
+        projectId: "user-001-ratatosk-dev",
+        storageBucket: "user-001-ratatosk-dev.appspot.com",
+        messagingSenderId: "1025693832328",
+        appId: "1:1025693832328:web:2c5f07b22fbe40de4d7b3d",
+        databaseURL: 'https://user-001-ratatosk-dev.firebaseio.com',
+        measurementId: 'G-HMBJLDVLEG'
+    }
+};
+
+export const firebaseAppUrl = `https://${firebaseConfigurations['WEBPAGE'].projectId}.web.app`; //'https://ratatosk.app',
+
+export const firebaseAppCallCloudFunctionsUrl: LookupFirebaseCallFuncUrl = {
+    'SCHEDULE': `https://${locationOfServer}-${firebaseConfigurations['SCHEDULE'].projectId}.cloudfunctions.net`,
+    'WEBPAGE': 'undefined',
+    'USER_001': `https://${locationOfServer}-${firebaseConfigurations['USER_001'].projectId}.cloudfunctions.net`,
+};
+
+export function isFirebaseUserProject(name: string): boolean {
+    return name.startsWith('USER_') && name.length === 'USER_xxx'.length;
+}

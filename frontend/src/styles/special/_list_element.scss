@@ -1,0 +1,12 @@
+@import "../basic/space/vars";
+@import "../basic/size/vars";
+@import "../basic/position/flex";
+
+$list-element-padding: $padding-element-double;
+
+.x-list-element {
+  @extend .x-flex-row;
+  padding: 0 $list-element-padding;
+  height: $list-element-height-small;
+}
+

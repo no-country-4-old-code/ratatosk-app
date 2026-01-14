@@ -1,0 +1,9 @@
+Use material colors A200.
+But color-transistion from left to right.
+Start with color 1 of left.
+Choose color 2 as color which is 2 position right in material color guide.
+Make sure both colors has transparency 100%.
+
+----------- 
+Use image (and colored images also) only to set accents.
+E.g. in Get-started for the tours

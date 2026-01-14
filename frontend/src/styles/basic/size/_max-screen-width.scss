@@ -1,0 +1,6 @@
+@import "../mixins/vars";
+
+.x-max-screen-width {
+  // should not fill whole screen (exceptions are charts)
+  max-width: $break-medium;
+}

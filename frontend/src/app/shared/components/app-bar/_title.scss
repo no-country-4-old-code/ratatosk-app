@@ -1,0 +1,10 @@
+@import "src/styles/basic/mixins/breakpoints";
+
+.title {
+  max-width: 140px;
+  @include respond-to(handhelds) {max-width: 230px;}
+  @include respond-to(medium-screens) {max-width: 350px;}
+}
+
+
+

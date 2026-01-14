@@ -1,0 +1,14 @@
+@import "../../../../styles/basic/grid/vars";
+
+.x-flex-column {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-content: flex-start;
+  align-items: center;
+}
+
+.padding-extra-small {
+  padding: $grid-step;
+}

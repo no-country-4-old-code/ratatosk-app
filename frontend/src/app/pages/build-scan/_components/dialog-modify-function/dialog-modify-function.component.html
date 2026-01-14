@@ -1,0 +1,67 @@
+<div mat-dialog-content>
+    <mat-stepper labelPosition="bottom" #stepper>
+        <mat-step>
+            <ng-template matStepLabel><div class="font-caption-colored">Function</div></ng-template>
+            <div class="x-padding-element"></div>
+            <ng-container *ngIf="section.func.selected$ | async as selected">
+                <ng-container *ngFor="let option of section.func.options; let idx=index">
+                    <div class="x-padding-element-top-bottom x-margin-element-top-bottom x-border-radius-min"
+                         [ngClass]="{'color-is-selected-outlined': option === selected}"
+                         matRipple
+                         (click)="selectFunctionAndGoNext(option, stepper)">
+                        <div class="font-button">{{lookupFunctionOption2Beautiful[option] | makeFirstLetterBig}}</div>
+                        <div class="x-padding-element-bottom "></div>
+                        <div class="x-line-wrap-text font-caption-colored">{{section.func.optionsInfo[idx] | makeFirstLetterBig}}</div>
+                    </div>
+                </ng-container>
+            </ng-container>
+
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel><div class="font-caption-colored">Params</div></ng-template>
+            <div class="x-padding-element"></div>
+            <ng-container *ngIf="lookupTemplate$ | async as lookupTemplate">
+                <ng-container *ngIf="section.params.selected$ | async as params">
+                    <ng-container *ngFor="let option of section.params.options; let idx=index">
+                        <ng-container *ngIf="params[option] !== undefined">
+                            <div class="x-flex-row-space-between font-button">
+                                <div>{{option | makeFirstLetterBig}}</div>
+                                <div class="x-padding-element-left-right">{{lookupTemplate[option].mapOption2String$(params[option]) | async}}</div>
+                                <div class="x-padding-element x-border-radius-min" (click)="setToDefault(option)" matRipple>
+                                    <mat-icon>{{icons.restoreDefault}}</mat-icon>
+                                </div>
+                            </div>
+                            <div class="font-caption-colored">{{lookupInfo[option]}}</div>
+                            <ng-container *ngTemplateOutlet="lookupTemplate[option].template; context: {data: lookupTemplate[option]}">
+                            </ng-container>
+                            <div class="x-padding-element"></div>
+                        </ng-container>
+                    </ng-container>
+                </ng-container>
+            </ng-container>
+
+            <div class="x-padding-element-top"></div>
+            <div class="x-padding-element">
+                <button class="float-right x-padding-element-left" mat-button [mat-dialog-close]="blueprint$ | async">Ok</button>
+                <button class="float-right" mat-button [mat-dialog-close]="undefined">Cancel</button>
+            </div>
+        </mat-step>
+    </mat-stepper>
+</div>
+
+<ng-template #slider let-data="data">
+    <app-selector-slide
+            [options$]="data.options$"
+            [selected$]="data.selected$"
+            (onSelection)="data.onSelectionCallback($event)">
+    </app-selector-slide>
+</ng-template>
+
+<ng-template #number let-data="data">
+    <app-selector-number-form
+            [selected$]="data.selected$"
+            [minMax]="data.minMaxValues"
+            (onSelection)="data.onSelectionCallback($event)">
+    </app-selector-number-form>
+</ng-template>
+

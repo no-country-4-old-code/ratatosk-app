@@ -1,0 +1,98 @@
+@use '~@angular/material' as mat;
+// import "hint" font class
+@import url('https://fonts.googleapis.com/css2?family=Vujahday+Script&display=swap');
+
+@mixin create_own_font_classes($config, $theme) {
+  //Create font classes with 'material-design-spec'-conform names.
+  $foreground: map-get($theme, foreground);
+  $text-colored: map-get($foreground, text-colored);
+  $text-uncolored: map-get($foreground, text);
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+
+  .font-colored {
+    color: $text-colored;
+  }
+
+  .font-uncolored {
+    color: $text-uncolored;
+  }
+
+  .font-primary {
+    color: mat.get-color-from-palette($primary);
+  }
+
+  .font-accent {
+    color: mat.get-color-from-palette($accent);
+  }
+
+  .font-h1 {
+    @include mat.typography-level($config, display-4);
+  }
+
+  .font-h2 {
+    @include mat.typography-level($config, display-3);
+  }
+
+  .font-h3 {
+    @include mat.typography-level($config, display-2);
+  }
+
+  .font-h4 {
+    @include mat.typography-level($config, display-1);
+  }
+
+  .font-h5 {
+    @include mat.typography-level($config, headline);
+  }
+
+  .font-title {
+    @include mat.typography-level($config, title);
+  }
+
+  .font-hint {
+    font-weight: 200; // very light
+    font-size: 34px;
+    color: mat.get-color-from-palette($primary);
+    font-family: 'Vujahday Script', cursive;
+  }
+
+  .font-title-colored {
+    @include mat.typography-level($config, title);
+    color: $text-colored;
+  }
+
+  .font-sub1 {
+    @include mat.typography-level($config, subheading-1);
+  }
+
+  .font-sub2 {
+    @include mat.typography-level($config, subheading-2);
+  }
+
+  .font-body1 {
+    @include mat.typography-level($config, body-1);
+  }
+
+  .font-body2 {
+    @include mat.typography-level($config, body-2);
+  }
+
+  .font-button {
+    @include mat.typography-level($config, button);
+  }
+
+  .font-caption {
+    @include mat.typography-level($config, caption);
+  }
+
+  .font-caption-colored {
+    @include mat.typography-level($config, caption);
+    color: $text-colored;
+  }
+
+  .font-input {
+    @include mat.typography-level($config, input);
+  }
+
+}

@@ -1,0 +1,87 @@
+<div class="wrapper">
+  <ng-container *ngIf="scan$ | async as scan; else loading">
+
+      <div class="x-elevation-app-bar">
+        <ng-container *ngIf="isSearchDialogActive else AppBarNormal">
+          <app-bar-search
+            [disableElevation]="true"
+            (clickOnReturn)="closeSearchBar()"
+            (keyUpSearch)="updateSearch($event)">
+          </app-bar-search>
+        </ng-container>
+
+        <ng-template #AppBarNormal>
+          <app-bar-normal
+            [title]="scan.title"
+            [iconTitlePath]="scan.iconPath"
+            [isIconTitleDisplayedOnCard]="true"
+            [iconLeft]="icons.back"
+            [iconRightFirst]="icons.search"
+            [iconRightSecond]="icons.delete"
+            [disableElevation]="true"
+            (clickOnGivenElement)="onClickAtAppBar($event)">
+          </app-bar-normal>
+        </ng-template>
+
+        <div class="list-header-shadow-element"></div>
+
+        <div class="x-fixed-after-app-bar color-app-bar">
+          <div class="x-padding-element-left-right">
+            <app-list-header
+                    [leftLabel]=labelsSort[0]
+                    [middleLabel]=labelsSort[1]
+                    [rightLabel]=labelsSort[2]
+                    [sortInfo$]="sortReq$"
+                    (clickOnLabel)="onClickAtSortLabel($event)">
+            </app-list-header>
+          </div>
+        </div>
+      </div>
+
+      <ng-container *ngIf="scan.timestampResultData > 0; else scanIsNewCalculated">
+        <ng-container *ngIf="assets$ | async as assets; else loading">
+          <div class="x-flex-element-grow x-padding-element-bottom-grid-step">
+            <cdk-virtual-scroll-viewport class="height-of-100vh" itemSize="72">
+              <div *cdkVirtualFor="let coin of assets">
+                <app-scan-content-list-element
+                        [asset]="coin"
+                        (click)="goToAssetDetail(coin.id)">
+                </app-scan-content-list-element>
+              </div>
+              <!-- Empty blocks needed because otherwise 100vh leads to hidden elements during scrolling -->
+              <div class="x-list-element"></div>
+              <div class="x-list-element"></div>
+              <div class="x-list-element"></div>
+              <div class="x-list-element"></div>
+            </cdk-virtual-scroll-viewport>
+          </div>
+        </ng-container>
+      </ng-container>
+
+  </ng-container>
+
+  <ng-template #loading>
+    <app-loading></app-loading>
+  </ng-template>
+
+
+  <ng-template #scanIsNewCalculated>
+    <div class="x-padding-element-double">
+      <div class="x-padding-element-bottom x-flex-row">
+        <mat-spinner [diameter]="24"></mat-spinner>
+        <div class="x-padding-element"></div>
+        <div>
+          <div class="font-sub2">
+            Filter is being initially processed
+          </div>
+          <div class="font-caption-colored">
+            This process could take up to 15 seconds.
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+</div>
+
+<app-fab-button (click)="goToModifyScan()" [icon]="icons.modify"></app-fab-button>

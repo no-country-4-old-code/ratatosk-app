@@ -1,0 +1,27 @@
+@import "basic";
+@import "mixin_keyframes";
+@import "mixin_compatibility";
+@import "vars";
+
+$keyframes-animation-appear: 'animate-appear';
+$keyframes-animation-disappear: 'animate-disappear';
+
+
+.x-animate-appear {
+  @extend .x-animation-backface-visibility-front-card;
+  @include for-multi-platform(animation, $keyframes-animation-appear $duration-flip-appear $timing-function-flip-appear both);
+}
+
+.x-animate-appear-slow {
+  // used for add-button in main menu
+  @extend .x-animation-backface-visibility-front-card;
+  @include for-multi-platform(animation, $keyframes-animation-appear $duration-flip-appear-slow $timing-function-flip-appear both);
+}
+
+.x-animate-disappear {
+  @extend .x-animation-backface-visibility-front-card;
+  @include for-multi-platform(animation, $keyframes-animation-disappear $duration-flip-appear $timing-function-flip-appear both);
+}
+
+@include keyframes-simple-transition($keyframes-animation-appear, $rotate-to-180X, $rotate-to-normal);
+@include keyframes-simple-transition($keyframes-animation-disappear, $rotate-to-normal, $rotate-to-180X);

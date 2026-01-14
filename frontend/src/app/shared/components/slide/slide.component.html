@@ -1,0 +1,10 @@
+
+<ng-container *ngFor="let templateInfo$ of templateStreams$ | async">
+    <div class="container" *ngIf="templateInfo$ | async as temp" (swipe)="onSwipeCards($event)" >
+        <div class="x-border-radius-min"
+             [ngClass]="[temp.animationClass]">
+            <ng-container *ngTemplateOutlet="temp.template"></ng-container>
+        </div>
+    </div>
+</ng-container>
+

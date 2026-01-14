@@ -1,0 +1,9 @@
+{
+  "spec_dir": "test",
+  "spec_files": [
+    "./setup-test-env.ts",
+    "**/*[sS]pec.ts"
+  ],
+  "stopSpecOnExpectationFailure": false,
+  "random": true
+}

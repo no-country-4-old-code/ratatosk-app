@@ -1,0 +1,16 @@
+<app-list-element-icon
+        [callback]="callback"
+        [disableRipple]="disableRipple"
+        [icon]="icon"
+        [iconColor]="iconColor"
+        [isIconImage]="isIconImage">
+
+    <div class="x-overflow-text">
+        <div [class]=titleClass>{{title | makeFirstLetterBig}}</div>
+        <ng-container *ngIf="subtext != undefined && subtext != empty">
+            <div class="x-padding-element-bottom-grid-step"></div>
+            <div [class]=subtextClass>{{subtext | makeFirstLetterBig}}</div>
+        </ng-container>
+    </div>
+
+</app-list-element-icon>

@@ -1,0 +1,18 @@
+@import "vars";
+
+.x-margin-element {
+  margin: $margin-element;
+}
+
+.x-margin-element-left {
+  margin-left: $margin-element;
+}
+
+.x-margin-element-right {
+  margin-right: $margin-element;
+}
+
+.x-margin-element-top-bottom {
+  margin-top: $margin-element;
+  margin-bottom: $margin-element;
+}

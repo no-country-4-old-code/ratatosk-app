@@ -1,0 +1,17 @@
+
+<app-list-element-basic [callback]="callback" [disableRipple]="disableRipple">
+    <div class="x-grid-left-section-width x-center-content-vertical">
+        <div class="x-icon-medium x-center-content-vertical x-padding-element-left">
+            <ng-container *ngIf="isIconImage; then IconAsImage else IconAsMatIcon"></ng-container>
+        </div>
+    </div>
+    <ng-content></ng-content>
+</app-list-element-basic>
+
+<ng-template #IconAsMatIcon>
+    <mat-icon [color]="iconColor" class="padding-correction-bottom x-border-radius-max x-icon-small font-colored">{{icon}}</mat-icon>
+</ng-template>
+
+<ng-template #IconAsImage>
+    <img class="padding-correction-bottom x-border-radius-max x-icon-medium" [src]=icon>
+</ng-template>

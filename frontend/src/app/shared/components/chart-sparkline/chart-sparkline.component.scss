@@ -1,0 +1,16 @@
+@import "../../../../styles/basic/mixins/breakpoints";
+@import "../../../../styles/basic/space/vars";
+@import "../../../../styles/basic/size/vars";
+
+$chart-line-stroke: 1.0px;
+
+.chart-spark {
+  position: relative;
+  height: $list-element-height-medium - $padding-element-double * 2;
+}
+
+.chart-line {
+  fill: none;
+  stroke-width: $chart-line-stroke;
+}
+

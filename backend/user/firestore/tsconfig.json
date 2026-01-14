@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "sourceMap": true,
+        "experimentalDecorators": true,
+        "lib": [ "es6", "es2019" ],
+        "outDir": "test/lib"
+    }
+}

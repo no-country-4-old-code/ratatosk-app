@@ -1,0 +1,16 @@
+@import "src/styles/basic/space/vars";
+$space-correction: 2px;
+
+.search-form {
+  border: 0;
+  outline: none;
+  width: 100%;  // adapt the input form width to flex container
+}
+
+.padding-correction {
+  padding-bottom: $space-correction;
+}
+
+.icon {
+  padding: 0 $padding-element-double;
+}

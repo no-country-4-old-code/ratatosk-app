@@ -1,0 +1,34 @@
+{
+  "name": "cloud-firestore-rules-user",
+  "private": true,
+  "description": "Cloud Firestore rules for user database",
+  "scripts": {
+    "all": "npm run lint && npm run build-check && npm run test",
+    "test": "firebase emulators:exec --only firestore 'npm run test-only'",
+    "build-check": "",
+    "lint": "eslint --fix \"test/**/*.ts\" && eslint \"test/**/*.ts\"",
+    "rm-dist": "rm -r -f ./dist",
+    "test-only": "jasmine-ts --config=./test/jasmine.json",
+    "set-project-to-internal": "npm run func-set-project internal",
+    "set-project-to-public": "npm run func-set-project public",
+    "func-set-project": "func() { cd ../../..; ./setFirebaseProject.sh \"$1\"; }; func"
+  },
+  "devDependencies": {
+    "@firebase/testing": "^0.15.0",
+    "@types/jasmine": "^3.5.7",
+    "@typescript-eslint/eslint-plugin": "^2.18.0",
+    "@typescript-eslint/parser": "^2.18.0",
+    "eslint": "^6.8.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-unused-imports": "^0.1.2",
+    "jasmine": "^3.5.0",
+    "jasmine-ts": "^0.4.0",
+    "source-map-support": "0.5.9",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.8.2"
+  },
+  "dependencies": {
+    "@types/mathjs": "^6.0.9",
+    "mathjs": "^8.1.0"
+  }
+}

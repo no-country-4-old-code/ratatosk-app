@@ -1,0 +1,12 @@
+
+<ng-container *ngIf="auth.isLoggedIn$ | async; then LogoutScreen else LoginScreen"></ng-container>
+
+<ng-template #LoginScreen>
+    <app-bar-return [title]="'Login'" [disableElevation]="true"></app-bar-return>
+    <app-login-screen [tabIndexSubject]="tab.screenLogin.tabIndexSubject" [router]="router" [http]="http"
+                      [snackbar]="snackBar"></app-login-screen>
+</ng-template>
+
+<ng-template #LogoutScreen>
+    <app-logout-screen [givenDialog]="dialog" [givenSnackBar]="snackBar" [router]="router" [givenUserData$]="user.user$"></app-logout-screen>
+</ng-template>

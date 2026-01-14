@@ -1,0 +1,17 @@
+<div class="x-flex-row x-padding-element">
+    <div class="width-left-element x-padding-element font-sub1">{{description}}</div>
+    <div class="x-flex-element-grow x-overflow-text">
+        <ng-container *ngIf="content$ | async as content">
+            <div class="x-padding-element x-overflow-text x-border-radius-min font-body1"
+                 [ngClass]="{'color-card': content.isValid, 'color-warn-bg': !content.isValid }"
+                 (click)="clickOnCard.emit()"
+                 matRipple>
+                {{content.info}}
+            </div>
+        </ng-container>
+    </div>
+    <div class="x-padding-element-left"> </div>
+    <div class="width-right-element x-padding-element" matRipple [matRippleDisabled]="iconSideOption === ''" (click)="clickOnSideOption.emit()">
+        <mat-icon class="x-icon-small">{{iconSideOption}}</mat-icon>
+    </div>
+</div>

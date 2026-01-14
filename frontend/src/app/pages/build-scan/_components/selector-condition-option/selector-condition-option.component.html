@@ -1,0 +1,15 @@
+
+<ng-container *ngIf="displayedSelection$ | async as content">
+    <ng-container *ngIf="options$ | async as options">
+        <ng-container *ngIf="optionsInfos$ | async as infos" >
+            <ng-container *ngIf="selected$ | async as selected">
+                <div class="x-padding-element-top-bottom">
+                    <div class="x-padding-element x-border-radius-min x-overflow-text color-card font-button"
+                         (click)="openDialog(options, infos, selected[0])" matRipple
+                         style="min-width: 14px; text-align: center" [innerHtml]="content">
+                    </div>
+                </div>
+            </ng-container>
+        </ng-container>
+    </ng-container>
+</ng-container>
