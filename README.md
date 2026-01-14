@@ -5,10 +5,10 @@ The sources are outdated but open source.
 
 ## The idea
 The app allows you to create your own crypto crawlers to search the cryptocurrency market.
-Each search task (scan) can be highly customized, for example: “Show me all cryptocurrencies that are below their 4-week average but have a Reddit score above 70.”
+Each search task (scan) can be highly customized, for example: *“Show me all cryptocurrencies that are below their 4-week average but have a Reddit score above 70.”*
 
 The app also notifies you whenever one of your crypto crawlers finds a match by sending a push notification (similar to WhatsApp).
-Your crawlers run on servers 24/7, searching for trading opportunities that match your filters.
+Your crawlers run on servers 24/7h in the background, searching for trading opportunities that match your filters.
 
 ## Structure
 - **backend**
