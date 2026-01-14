@@ -36,7 +36,9 @@ Your crawlers run on servers 24/7, searching for trading opportunities that matc
     - I moved a lot of stateless logic outside of services.
     - I stopped testing the rendered UI because unit tests were slow and unstable. Instead, I tested the outputs/streams of components directly, which significantly improved the feedback loop. Manual UI checks then took about five additional minutes per pull request.
     - I definitely created some RxJS pipeline monsters.
-    
+- **media**
+  - I added this one to store some screenshots from the app.
+
 ## Health Status
 
 **Not runnable.** I stopped working on this project some time ago.
