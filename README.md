@@ -1,22 +1,16 @@
-# ratatosk-app
-
+# Ratatosk
 A progressive app for monitoring and analysing cryptocurrencies.
 The startup closed 2025.
 The sources are outdated but open source.
 
 ## The idea
-
 The app allows you to create your own crypto crawlers.
 For example: “Show me all cryptocurrencies that are below their 4-week average but have a Reddit score above 70.”
 
 The app also notifies you whenever one of your crypto crawlers finds a match by sending a push notification (similar to WhatsApp).
 Your crawlers run on servers 24/7, searching for trading opportunities that match your filters.
 
-## Impressions
-
-
 ## Structure
-
 - **backend**
   - **schedule**  
     Handles load-balanced user registration. It assigns new users to the most suitable database, based solely on the *least filled* database. There is no logic related to distance or latency.
@@ -40,13 +34,18 @@ Your crawlers run on servers 24/7, searching for trading opportunities that matc
   - I added this one to store some screenshots from the app.
 
 ## Health Status
-
 **Not runnable.** I stopped working on this project some time ago.
 I added it to this repository because people asked to take a look at it.
 The original Git history (including all personal information) has been removed to avoid being “truffle hogged”.
 
-### Why did it fail?
+## Impressions
+<p float="left">
+  <img src="/media/snapshot_build_desktop_1366x768.png" width="600" />
+  <img src="/media/snapshot_build_desktop_1366x768.png" width="500" />
+  <img src="/media/snapshot_build_desktop_1366x768.png" width="400" />
+</p>
 
+## Why did it fail?
 After two years of work, the app was running smoothly. It was accessible via the web and could also be downloaded as a mobile app from the Google Play Store and the Apple App Store.
 I founded a legal entity (GmbH) and waited for customers who never came.
 
