@@ -40,9 +40,14 @@ The original Git history (including all personal information) has been removed t
 
 ## Impressions
 <p float="left">
-  <img src="/media/snapshot_build_desktop_1366x768.png" width="600" />
-  <img src="/media/snapshot_build_desktop_1366x768.png" width="500" />
-  <img src="/media/snapshot_build_desktop_1366x768.png" width="400" />
+  <img src="/media/screen_title_720x1080.png" width="300" />
+  <img src="/media/snapshot_build_mobile_480x800.png" width="300" />
+  <img src="/media/snapshot_chart_mobile_480x800.png" width="300" />
+    <img src="/media/snapshot_conditons2_mobile_480x800.png" width="300" />
+    <img src="/media/snapshot_main_mobile_480x800.png" width="300" />
+        <img src="/media/snapshot_observed_mobile_480x800.png" width="300" />
+    
+  
 </p>
 
 ## Why did it fail?
