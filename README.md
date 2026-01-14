@@ -34,7 +34,7 @@ Your crawlers run on servers 24/7, searching for trading opportunities that matc
   - I added this one to store some screenshots from the app.
 
 ## Health Status
-**Not runnable.** I stopped working on this project some time ago.
+**Tottaly out-dated.** I stopped working on this project some time ago.
 I added it to this repository because people asked to take a look at it.
 The original Git history (including all personal information) has been removed to avoid being “truffle hogged”.
 
